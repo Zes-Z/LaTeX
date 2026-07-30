@@ -1,4 +1,7 @@
 \documentclass[lang=cn,10pt]{elegantbook}
+\usepackage{hyperref}
+
+
 
 \title{Statistic Beans：統計学豆知識}
 \subtitle{不应错过的统计学基础知识}
@@ -47,29 +50,61 @@
 
 \chapter{写在前面}
 
-本知识手册记录了一些容易被忽视的统计基础概念，这也是为什么取名为“Statistic Beans：統計学豆知識”。如果您在阅读时遇到了问题，欢迎联系作者。
+本知识手册记录了一些容易被忽视的统计基础概念，这也是为什么取名为“Statistic Beans：統計学豆知識”。如果您在阅读时遇到了困难，欢迎联系作者。
 
 作者的联系方式：
 \begin{itemize}
+  \item 邮箱：\email{zzs234@yeah.net}
   \item Blog：\href{https://zesforu.pages.dev}{https://zesforu.pages.dev}
   \item GitHub：\href{https://github.com/Zes-Z}{https://github.com/Zes-Z}
-  \item 邮件：\email{zzs234@yeah.net}
 \end{itemize}
 
 \section{本书内容}
-
-你可以通过免安装的方式使用本模板，包括在线使用和本地（文件夹内）使用两种方式，也可以通过 \TeX{} 发行版安装使用。
-
+\begin{itemize}
+  \item 第1章，也就是你正在阅读的这里，会简要介绍2-8章的关键内容;
+  \item 第2章，描述了什么是统计，\textbf{统计}到底在干什么?
+  \item 第3章，一个完整的统计过程!
+  \item 第4章，主要回答：如何将统计得到的\textbf{一堆数字}优雅地\textbf{呈现}出来？并最大效率地\textbf{描述}这堆数字表达的\textbf{信息}？
+  \item 第5章，更进一步，我们需要一些\textbf{概率}和\textbf{分布}；
+  \item 第6章，假设检验：\textbf{从数字}形式的统计量\textbf{到文字}描述!\\
+  我们先假设今天万科喜家德没有喜三鲜，结果刚到喜家德坐下，发现隔壁桌吃的都是喜三鲜!\\
+  啊哈，看来我们的假设只有非常小的概率成立(因为可能有人外带了喜三鲜！)\\
+  所以，我们有很大把握今天喜家德有喜三鲜;\\
+  顺带一提，其实我觉得西芹鲜肉也不错!
+  \item 第7章，方差分析，分析的是三个以上的\textbf{组均值是否存在显著差异}，差异的\textbf{原因}是什么；
+  \item 第8章，\textbf{给出}多组一个或多个变量的\textbf{对应数值}，能否预测我们\textbf{想知道的数据}？\\
+  例如：给你最近十天的\textbf{日照时间--平均气温}的对应数据，你能根据今天的日照时间预测今天的平均气温吗?\\
+  不可以看天气预报!
+  \item 第9章，
+  \item 附录部分放置了一些常见分布的概率临界值表供参考
+\end{itemize}
 
 
 \section{记录契机}
+这本“知识手册”，总结了一些学习概率论与数理统计的心得，足以覆盖初入统计涉及到的一些基础概念。其实在本学期开学前，作者本以为能从从容容地应付下
+述课程，结果却让我大为惊叹。此时距离《语言研究中的统计学》这门课结束还有半个月，距离托
+业考试还有一月余五天，最近无心学习，所以才有时间写这本小册子。第一次尝试写知识手册，不过请读者诸位放心，全文无杜撰，无毒，
+大可放心“食用”。
 
-出于某些因素的考虑，Elegant\LaTeX{} 项目自 2019 年 5 月 20 日开始，\textbf{不再接受任何非作者预约性质的提交}（pull request）！如果你想改进模板，你可以给我们提交 issues，或者可以在遵循协议（LPPL-1.3c）的情况下，克隆到自己仓库下进行修改。
+那么，为什么写这本小册子？答案很简单：为了方便。就如同日语中为了发音便利
+而产生了「音便」一般。\textbf{如果把学习过的知识，总结记录下来，不论是对于再次查阅还是加深理解，都很有益。}数周前，一位朋友和我探讨一些统计上的问题，大概是关于$F$分布和$p$
+值之类的，我本以为能够清晰简明地解释，但并非如此；几天前，和另一位
+朋友闲聊时，涉及到“统计学”时，不禁感叹道：“本来**就没啥说服力,全靠吹气球”，如果不引
+用一点方法，那便真正陷入了循环论证。于是我再次翻开了参考书籍，萌发了将部分所学记录下来的念头。
 
+此书写给自己和我的朋友们，如果有些许助益的话，也算是满足了我小小的虚荣心。
 
 
 \section{阅读建议}
-
+以下是一些阅读本书的建议：
+\begin{itemize}
+  \item 当出现数学公式时，只需要知道这串符号在\textbf{算些什么}，也可主动了解，这不是坏事。
+  \item 本书会在术语首次出现时解释说明，后不再赘述，建议添加标签、笔记。
+  \item 符号标记为分析案例，建议动手尝试，不要只看不做，那没有用。
+  \item 由于作者水平、认知有限，符号标记的内容仅为作者的见解，建议读者自查相关资料。
+  \item 感到迷惑时立即停下，你需要补充相关知识，或者回头看看。基础不牢，地动山摇。
+  \item 不想读时立即停下，你需要休息。
+\end{itemize}
 
 
 
@@ -78,19 +113,62 @@
 
 \chapter{数据与统计量}
 \section{数据一定是数字吗?}
+有人说，我们身处于一个物质世界。
+
+但其实，我们也生活在一个数据世界之中...我们的大脑，无时不刻都在处理海量的信息。每天早晨在睡意朦胧中，你听到闹钟响，然后爬起身来；洗漱时，你偶尔也会发呆，或回忆昨天发生的事情；打开手机和电脑，你快速地浏览消息并准备回复；工作时，你盯着满屏的文字、图片、excel表格，感到两眼发花...
+
+相信你已经感受到，\textbf{数据未必以数字的形式出现}。其实它也可以是文字、符号、甚至声音、图片、视频等，不过为了方便处理和研究，数据最终都会被转化为数字或类数字形式。
+\begin{definition}[数据] 
+数据是对研究对象的某种属性或特征进行观测，测量或记录后得到的、能够用于描述和分析的信息。
+
+数据是随机现象中观测结果的集合，是统计分析的基本材料。
+\end{definition}
 
 
 
 \section{统计量是什么?}
-最早我们在 ElegantNote 模板中加入了设备选项（\lstinline{device}），后来，我们觉得这个设备选项的设置可以应用到 ElegantBook 中\footnote{不过因为 ElegantBook 模板封面图片的存在，在修改页面设计时，需要对图片进行裁剪。}，而且 Book 一般内容比较多，如果在 iPad 上看无需切边，放大，那用户的阅读体验将会得到巨大提升。你可以使用下面的选项将版面设置为 iPad 设备模式\footnote{默认为 normal 模式，也即 A4 纸张大小。}
-\begin{lstlisting}
-\documentclass[pad]{elegantbook} %or
-\documentclass[device=pad]{elegantbook}
-\end{lstlisting}
+获得足够量的数据以后，便有了进行统计研究的基础支撑。但是，我们不能简单地罗列出所有数据，这非常的不便，也没有意义，当然这也不能被称为\textbf{统计}。
+
+因此，我们需要站在更高的总体的视角去提取样本数据(集)的信息，进行描述，分析；同时也应该以更加细致入微的视角，观察每个样本数据(集)之间的差异、联系。
+\begin{definition}[统计量] 
+统计量是由样本数据计算得到的、且不包含未知总体参数的函数。
+
+统计量 = 对样本数据进行某种计算得到的数值，用来描述样本或推断总体。
+\end{definition}
+
+常见的统计量用于基础描述统计，主要有:
+\begin{itemize}
+  \item 样本均值$\bar{x}$
+  \item 中位数
+  \item 众数
+  \item 极差
+  \item 方差
+  \item 标准差
+  \item 分位数
+  \item 相关系数
+\end{itemize}
+
+进阶的统计量用于从样本推断总体，主要有:
+\begin{itemize}
+  \item 标准化统计量
+  \item 偏度
+  \item 峰度
+  \item $t$统计量
+  \item $F$统计量
+  \item $\chi^2$统计量
+\end{itemize}
 
 
 
 \section{统计 = 数据 + 统计量 + 统计推断}
+如果说\textbf{数据}是统计的原材料，\textbf{统计量}是从大量的数据中提取，精简信息，
+那么我们还需要一个\textbf{统计推断}，执行一个\textbf{由样本推测总体}的操作，
+才能完成一个完整的统计，\textbf{统计推断}也是统计学最核心的部分。
+
+其中，数据回答：“我们观察到了什么？”
+统计量回答：“这些数据有什么特征？”
+统计推断回答：“这些特征是否具有说服力，能否推广到更大的世界？”
+
 
 
 
@@ -98,15 +176,47 @@
 
 \chapter{完整的统计过程}
 \section{提出问题}
+通常情况下，我们希望量化研究或说明某个问题时，才会使用到统计。我们收集的数据，需要计算的统计量，以及统计推断和描述都将紧紧围绕最初的问题展开，这时，作为统计过程起点的\textbf{问题提出}就显得尤为重要。
 
+但也有时，我们需要先抛出一个大致的猜想，根据已有可行的统计方法、预计能收集到的数据，来反向不断明确我们的问题。这样就不会出现：你提出了一个天马行空，富有研究意义的课题，却不知从何下手，用统计的手段来验证和解释你的课题的情况。
 
 
 \section{统计设计}
 
 
 
-\section{样本数据采集--抽样方式与最佳组数}
+\section{样本数据采集－－抽样方式与最佳组数}
+在完成统计设计后，即可开始统计研究的第一步实际操作－－样本数据采集。
 
+为了尽可能地保证统计的无偏差性和准确性，在采集样本数据时需要进行系统的、公平的、随机的抽样。既不能随心所欲地收集数据，也不能贪图方便省事。
+
+例如：假设你是一位日语教师，现想了解学校里日语学生的日语考试成绩。乍一看样本数据采集十分简单，只需收集一定量的日语成绩即可；但实际上
+这里藏了不少坑！首先你不能仅收集自己班级学生的信息作为样本数据集，数据的来源要尽可能的全面，多样，无偏好，最终保证你收集到的那一小部分数据能够很好地代表总体。
+所以你应该尽可能多的，随机收集学校里日语学生的日语考试成绩，再进行下一步的统计。
+
+\begin{remark}
+如果能收集到本学校所有日语学生的日语考试成绩自然是最好，这便是\textbf{总体}，但有时迫于现实原因或条件限制，我们只能收集到一部分数据，这便是用于\textbf{代表总体}的\textbf{样本}。
+只要你从总体中抽取样本的方式足够科学，那么即使只收集到一小部分数据，也能够很好地反应总体的情况。
+\end{remark}
+
+以下是一些样本数据采集中使用到的经典抽样方法，前三种为概率抽样，后三种为非概率抽样：
+\begin{itemize}
+  \item 简单随机抽样
+  \item 系统抽样/等距抽样
+  \item 分层抽样
+  \item 便利抽样
+  \item 判断抽样
+  \item 滚雪球抽样
+\end{itemize}
+
+若采集到$N$条数据，现要分组，以直方图(或其它)形式分组展示，则应将其分为$k$组，总的样本数$N$与组数$k$满足\textbf{斯特吉斯规则}。
+
+\begin{theorem}[斯特吉斯规则 Sturges' rule]  
+    \begin{center}
+      $k = 1 + \log_2 N$
+    \end{center}   
+
+\end{theorem}
 
 
 \section{数据的整理与描述}
@@ -260,636 +370,640 @@
 
 
 
-% \chapter{原书使用代码}
-% \section{表格}
+\chapter{原书使用代码}
+\section{表格}
 
-% \begin{table}[htbp]
-%   \centering
-%   \caption{封面元素信息}
-%   \begin{tabular}{p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}}
-%     \toprule
-%     信息 & 命令 & 信息 & 命令 & 信息 & 命令 \\
-%     \midrule
-%     标题 & \lstinline|\title| & 副标题 & \lstinline|\subtitle| & 作者 & \lstinline|\author| \\
-%     机构 & \lstinline|\institute| & 日期 &  \lstinline|\date| & 版本 & \lstinline|\version| \\
-%     箴言 & \lstinline|\extrainfo| & 封面图 & \lstinline|\cover| & 徽标 & \lstinline|\logo| \\
-%     \bottomrule
-%   \end{tabular}
-% \end{table}
+\begin{table}[htbp]
+  \centering
+  \caption{封面元素信息}
+  \begin{tabular}{p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}}
+    \toprule
+    信息 & 命令 & 信息 & 命令 & 信息 & 命令 \\
+    \midrule
+    标题 & \lstinline|\title| & 副标题 & \lstinline|\subtitle| & 作者 & \lstinline|\author| \\
+    机构 & \lstinline|\institute| & 日期 &  \lstinline|\date| & 版本 & \lstinline|\version| \\
+    箴言 & \lstinline|\extrainfo| & 封面图 & \lstinline|\cover| & 徽标 & \lstinline|\logo| \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-% 另外，额外增加一个 \lstinline{\bioinfo} 命令，有两个选项，分别是信息标题以及信息内容。比如需要显示{\kaishu User Name：111520}，则可以使用 
-% \begin{lstlisting}
-% \bioinfo{User Name}{115520}
-% \end{lstlisting}
+另外，额外增加一个 \lstinline{\bioinfo} 命令，有两个选项，分别是信息标题以及信息内容。比如需要显示{\kaishu User Name：111520}，则可以使用 
+\begin{lstlisting}
+\bioinfo{User Name}{115520}
+\end{lstlisting}
 
-% 封面中间位置的色块的颜色可以使用下面命令进行修改：
-% \begin{lstlisting}
-% \definecolor{customcolor}{RGB}{32,178,170}
-% \colorlet{coverlinecolor}{customcolor}
-% \end{lstlisting}
-
-
-
-% \section{章标标题}
-
-% 本模板内置 2 套\textit{章标题显示风格}，包含 \lstinline{hang}（默认）与 \lstinline{display} 两种风格，区别在于章标题单行显示（\lstinline{hang}）与双行显示（\lstinline{display}），本说明使用了 \lstinline{hang}。调用方式为
-% \begin{lstlisting}
-% \documentclass[hang]{elegantbook} %or
-% \documentclass[titlestyle=hang]{elegantbook}
-% \end{lstlisting}
-
-% 在章标题内，章节编号默认是以数字显示，也即{\kaishu 第 1 章}，{\kaishu 第 2 章}等等，如果想要把数字改为中文，可以使用
-% \begin{lstlisting}
-% \documentclass[chinese]{elegantbook} %or
-% \documentclass[scheme=chinese]{elegantbook}
-% \end{lstlisting}
+封面中间位置的色块的颜色可以使用下面命令进行修改：
+\begin{lstlisting}
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\end{lstlisting}
 
 
 
-% \section{语言}
-% 本模板内含两套基础语言环境 \lstinline{lang=cn}、\lstinline{lang=en}。改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
-% \begin{lstlisting}
-% \documentclass[cn]{elegantbook} 
-% \documentclass[lang=cn]{elegantbook}
-% \end{lstlisting}
+\section{章标标题}
 
-% 除模板自带的两套语言设定之外，由\textbf{网友}提供的其他语言环境设置如下：
-% \begin{itemize}
-%   \item 由 \href{https://github.com/VincentMVV}{VincentMVV} 提供的意大利语翻译 \lstinline{lang=it}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
-%   \item 由 \href{https://github.com/abfek66}{abfek66} 提供的法语翻译 \lstinline{lang=fr}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
-%   % \item 由 \href{https://github.com/stultus}{stultus} 提供的马拉雅拉姆语翻译 \lstinline{lang=}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/90}{Malayalam translation}；
-%   \item 由 \href{https://github.com/inktvis75}{inktvis75} 提供的荷兰语翻译 \lstinline{lang=nl}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/108}{Dutch Translation}；
-%   \item 由 \href{https://github.com/palkotamas}{palkotamas} 提供的匈牙利语翻译 \lstinline{lang=hu}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/111}{Hungarian translation}；
-%   \item 由 Lisa 提供的德语翻译 \lstinline{lang=de}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation}；
-%   \item 由 Gustavo A. Corradi 提供的西班牙语的翻译 \lstinline{lang=es}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/133}{Spanish translation}；
-%   \item 由 \href{https://github.com/Altantsooj}{Altantsooj} 提供的蒙古语的翻译 \lstinline{lang=mn}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation}；
-%   \item 由 \href{https://github.com/inusturbo}{inusturbo} 提供的日本语的翻译 \lstinline{lang=jp}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/172}{Japanese Translation}。
-% \end{itemize}
+本模板内置 2 套\textit{章标题显示风格}，包含 \lstinline{hang}（默认）与 \lstinline{display} 两种风格，区别在于章标题单行显示（\lstinline{hang}）与双行显示（\lstinline{display}），本说明使用了 \lstinline{hang}。调用方式为
+\begin{lstlisting}
+\documentclass[hang]{elegantbook} %or
+\documentclass[titlestyle=hang]{elegantbook}
+\end{lstlisting}
 
-% \begin{remark}
-% 以上各个语言的设定均为网友设定，我们未对上述翻译进行过校对，如果有问题，请在对应的 issue 下评论。并且，只有中文环境（\lstinline{lang=cn}）才可以输入中文。
-% \end{remark}
+在章标题内，章节编号默认是以数字显示，也即{\kaishu 第 1 章}，{\kaishu 第 2 章}等等，如果想要把数字改为中文，可以使用
+\begin{lstlisting}
+\documentclass[chinese]{elegantbook} %or
+\documentclass[scheme=chinese]{elegantbook}
+\end{lstlisting}
 
 
 
-% \section{数学环境简介}
+\section{语言}
+本模板内含两套基础语言环境 \lstinline{lang=cn}、\lstinline{lang=en}。改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
+\begin{lstlisting}
+\documentclass[cn]{elegantbook} 
+\documentclass[lang=cn]{elegantbook}
+\end{lstlisting}
 
-% 在我们这个模板中，我们定义了两种不同的定理模式 \lstinline{mode}，包括简单模式（\lstinline{simple}）和炫彩模式（\lstinline{fancy}），默认为 \lstinline{fancy} 模式，不同模式的选择为
-% \begin{lstlisting}
-% \documentclass[simple]{elegantbook} %or
-% \documentclass[mode=simple]{elegantbook}
-% \end{lstlisting}
+除模板自带的两套语言设定之外，由\textbf{网友}提供的其他语言环境设置如下：
+\begin{itemize}
+  \item 由 \href{https://github.com/VincentMVV}{VincentMVV} 提供的意大利语翻译 \lstinline{lang=it}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
+  \item 由 \href{https://github.com/abfek66}{abfek66} 提供的法语翻译 \lstinline{lang=fr}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
+  % \item 由 \href{https://github.com/stultus}{stultus} 提供的马拉雅拉姆语翻译 \lstinline{lang=}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/90}{Malayalam translation}；
+  \item 由 \href{https://github.com/inktvis75}{inktvis75} 提供的荷兰语翻译 \lstinline{lang=nl}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/108}{Dutch Translation}；
+  \item 由 \href{https://github.com/palkotamas}{palkotamas} 提供的匈牙利语翻译 \lstinline{lang=hu}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/111}{Hungarian translation}；
+  \item 由 Lisa 提供的德语翻译 \lstinline{lang=de}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation}；
+  \item 由 Gustavo A. Corradi 提供的西班牙语的翻译 \lstinline{lang=es}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/133}{Spanish translation}；
+  \item 由 \href{https://github.com/Altantsooj}{Altantsooj} 提供的蒙古语的翻译 \lstinline{lang=mn}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation}；
+  \item 由 \href{https://github.com/inusturbo}{inusturbo} 提供的日本语的翻译 \lstinline{lang=jp}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/172}{Japanese Translation}。
+\end{itemize}
 
-% 本模板定义了四大类环境
+\begin{remark}
+以上各个语言的设定均为网友设定，我们未对上述翻译进行过校对，如果有问题，请在对应的 issue 下评论。并且，只有中文环境（\lstinline{lang=cn}）才可以输入中文。
+\end{remark}
 
-% \begin{itemize}
-%   \item \textit{定理类环境}，包含标题和内容两部分，全部定理类环境的编号均以章节编号。根据格式的不同分为 3 种
-%     \begin{itemize}
-%       \item \textcolor{main}{\textbf{definition}} 环境，颜色为 \textcolor{main}{main}；
-%       \item \textcolor{second}{\textbf{theorem、lemma、corollary、axiom、postulate}} 环境，颜色为 \textcolor{second} {second}；
-%       \item \textcolor{third}{\textbf{proposition}} 环境，颜色为 \textcolor{third}{third}。
-%     \end{itemize}
-%   \item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
-%   \item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
-%   \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property、remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
-% \end{itemize}
 
-% \subsection{定理类环境的使用}
 
-% 由于本模板使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，定理的使用方法如下：
-% \begin{lstlisting}
-% \begin{theorem}{theorem name}{label}
-%   The content of theorem.
-% \end{theorem}
-% \end{lstlisting}
+\section{数学环境简介}
 
-% 第一个必选项 \lstinline{theorem name} 是定理的名字，第二个必选项 \lstinline{label} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。
+在我们这个模板中，我们定义了两种不同的定理模式 \lstinline{mode}，包括简单模式（\lstinline{simple}）和炫彩模式（\lstinline{fancy}），默认为 \lstinline{fancy} 模式，不同模式的选择为
+\begin{lstlisting}
+\documentclass[simple]{elegantbook} %or
+\documentclass[mode=simple]{elegantbook}
+\end{lstlisting}
 
-% 在用户多次反馈下，4.x 之后，引入了原生定理的支持方式，也就是使用可选项方式：
+本模板定义了四大类环境
 
-% \begin{lstlisting}
-% \begin{theorem}[theorem name] \label{thm:theorem-label}
-%   The content of theorem.
-% \end{theorem}
-% % or 
-% \begin{theorem} \label{thm:theorem-withou-name}
-%   The content of theorem without name.
-% \end{theorem}
-% \end{lstlisting}
+\begin{itemize}
+  \item \textit{定理类环境}，包含标题和内容两部分，全部定理类环境的编号均以章节编号。根据格式的不同分为 3 种
+    \begin{itemize}
+      \item \textcolor{main}{\textbf{definition}} 环境，颜色为 \textcolor{main}{main}；
+      \item \textcolor{second}{\textbf{theorem、lemma、corollary、axiom、postulate}} 环境，颜色为 \textcolor{second} {second}；
+      \item \textcolor{third}{\textbf{proposition}} 环境，颜色为 \textcolor{third}{third}。
+    \end{itemize}
+  \item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
+  \item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
+  \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property、remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
+\end{itemize}
 
-% 其他相同用法的定理类环境有：
+\subsection{定理类环境的使用}
 
-% \begin{table}[htbp]
-%    \centering
-%    \caption{定理类环境}
-%      \begin{tabular}{llll}
-%      \toprule
-%      环境名 & 标签名 & 前缀 & 交叉引用 \\
-%      \midrule
-%      definition & label & def   & \lstinline|\ref{def:label}| \\
-%      theorem & label & thm   & \lstinline|\ref{thm:label}| \\
-%      postulate & label & pos & \lstinline|\ref{pos:label}| \\
-%      axiom & label & axi & \lstinline|\ref{axi:label}|\\
-%      lemma & label & lem   & \lstinline|\ref{lem:label}| \\
-%      corollary & label & cor   & \lstinline|\ref{cor:label}| \\
-%      proposition & label & pro   & \lstinline|\ref{pro:label}| \\
-%      \bottomrule
-%      \end{tabular}%
-%    \label{tab:theorem-class}%
-%  \end{table}%
+由于本模板使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，定理的使用方法如下：
+\begin{lstlisting}
+\begin{theorem}{theorem name}{label}
+  The content of theorem.
+\end{theorem}
+\end{lstlisting}
+
+第一个必选项 \lstinline{theorem name} 是定理的名字，第二个必选项 \lstinline{label} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。
+
+在用户多次反馈下，4.x 之后，引入了原生定理的支持方式，也就是使用可选项方式：
+
+\begin{lstlisting}
+\begin{theorem}[theorem name] \label{thm:theorem-label}
+  The content of theorem.
+\end{theorem}
+% or 
+\begin{theorem} \label{thm:theorem-withou-name}
+  The content of theorem without name.
+\end{theorem}
+\end{lstlisting}
+
+其他相同用法的定理类环境有：
+
+\begin{table}[htbp]
+   \centering
+   \caption{定理类环境}
+     \begin{tabular}{llll}
+     \toprule
+     环境名 & 标签名 & 前缀 & 交叉引用 \\
+     \midrule
+     definition & label & def   & \lstinline|\ref{def:label}| \\
+     theorem & label & thm   & \lstinline|\ref{thm:label}| \\
+     postulate & label & pos & \lstinline|\ref{pos:label}| \\
+     axiom & label & axi & \lstinline|\ref{axi:label}|\\
+     lemma & label & lem   & \lstinline|\ref{lem:label}| \\
+     corollary & label & cor   & \lstinline|\ref{cor:label}| \\
+     proposition & label & pro   & \lstinline|\ref{pro:label}| \\
+     \bottomrule
+     \end{tabular}%
+   \label{tab:theorem-class}%
+ \end{table}%
  
-% % \subsection{算法环境}
+% \subsection{算法环境}
 
  
-% % \begin{algorithm}\label{alg:test}
-% %   \Input{A bitmap $I$ of size $w \times l$}
-% %   \Output{A partition of the bitmap}
-% %   \BlankLine
-% %   \emph{special treatment of the first line}\;
-% %   \For{$i \leftarrow 2$ \KwTo $l$}{
-% %     \emph{special treatment of the first element of line $i$}\;
-% %     \For{$j \leftarrow 2$ \KwTo $w$}{\label{forins}
-% %       $\Left \leftarrow \FindCompress{$I[i,j-1]$}$\;
-% %       $\Up \leftarrow \FindCompress{$I[i-1,]$}$\;
-% %       $\This \leftarrow \FindCompress{$I[i,j]$}$\;
-% %       \If(\tcp*[h]{O(\Left,\This)==1}){\Left compatible with \This}{\label{lt}
-% %         \lIf{$\Left < \This$}{$\Union{\Left,\This}$}
-% %         \lElse{$\Union{\This,\Left}$}
-% %       }
-% %       \If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
-% %         \lIf{$\Up < \This$}{$\Union{\Up,\This}$}
-% %         \tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
-% %         \lElse{$\Union{\This,\Up}$}\tcp*[r]{\This{} linked to \Up}\label{lelse}
-% %       }
-% %     }
-% %     \lForEach{element $e$ of the line $i$}{\FindCompress{p}}
-% %   }
-% %   \caption{disjoint decomposition}\label{algo_disjdecomp}
-% % \end{algorithm}
-
-
-% \subsection{修改计数器}
-
-% 当前定理等环境计数器按章计数，如果想修改定理类环境按节计数，可以修改计数器选项 thmcnt：
-
-% \begin{lstlisting}
-%   \documentclass[section]{elegantbook} %or
-%   \documentclass[thmcnt=section]{elegantbook}
-% \end{lstlisting}
-
-
-% \subsection{其他环境的使用}
-
-% 其他三种环境没有选项，可以直接使用，比如 \lstinline{example} 环境的使用方法与效果：
-% \begin{lstlisting}
-% \begin{example}
-%    This is the content of example environment.
-% \end{example}
-% \end{lstlisting}
-
-% 这几个都是同一类环境，区别在于
-
-% \begin{itemize}
-%   \item 示例环境（example）、练习（exercise）与例题（problem）章节自动编号；
-%   \item 注意（note），练习（exercise）环境有提醒引导符；
-%   \item 结论（conclusion）等环境都是普通段落环境，引导词加粗。
-% \end{itemize}
-
-% \section{列表环境}
-% 本模板借助于 \lstinline{tikz} 定制了 \lstinline{itemize} 和 \lstinline{enumerate} 环境，其中 \lstinline{itemize} 环境修改了 3 层嵌套，而 \lstinline{enumerate} 环境修改了 4 层嵌套（仅改变颜色）。示例如下\\[2ex]
-% \begin{minipage}[b]{0.49\textwidth}
-%   \begin{itemize}
-%     \item first item of nesti;
-%     \item second item of nesti;
-%       \begin{itemize}
-%         \item first item of nestii;
-%         \item second item of nestii;
-%         \begin{itemize}
-%           \item first item of nestiii;
-%           \item second item of nestiii.
-%         \end{itemize}   
-%       \end{itemize}
-%   \end{itemize}
-% \end{minipage}
-% \begin{minipage}[b]{0.49\textwidth}
-%   \begin{enumerate}
-%     \item first item of nesti;
-%     \item second item of nesti;
-%       \begin{enumerate}
-%         \item first item of nestii;
-%         \item second item of nestii;
-%         \begin{enumerate}
-%           \item first item of nestiii;
-%           \item second item of nestiii.
-%         \end{enumerate}   
-%       \end{enumerate}
-%   \end{enumerate}
-% \end{minipage}
-
-
-
-% \section{参考文献}
-% 文献部分，本模板调用了 biblatex 宏包，并提供了 biber（默认） 和 bibtex 两个后端选项，可以使用 \lstinline{bibend} 进行修改：
-
-% \begin{lstlisting}
-%   \documentclass[bibtex]{elegantbook}
-%   \documentclass[bibend=bibtex]{elegantbook}
-% \end{lstlisting}
-
-% 关于文献条目（bib item），你可以在谷歌学术，Mendeley，Endnote 中取，然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。
-
-% 为了方便文献样式修改，模板引入了 \lstinline{bibstyle} 和 \lstinline{citestyle} 选项，默认均为数字格式（numeric），参考文献示例：\cite{cn1,en2,en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
-
-% 如果需要设置为国标 GB7714-2015，需要使用：
-% \begin{lstlisting}
-%   \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
-% \end{lstlisting}
-
-% 如果需要添加排序方式，可以在导言区加入
-% \begin{lstlisting}
-%   \ExecuteBibliographyOptions{sorting=ynt}
-% \end{lstlisting}
-
-% 启用国标之后，可以加入 \lstinline{sorting=gb7714-2015}。
-
-
-
-% \section{添加序章}
-
-% 如果你想在第一章前面添序章，不改变原本章节序号，可以在第一章内容前面使用 
-% \begin{lstlisting}
-% \chapter*{Introduction}
-% \markboth{Introduction}{Introduction}
-% The content of introduction.
-% \end{lstlisting}
-
-
-
-% \section{目录选项与深度}
-% 本模板添加了一个目录选项 \lstinline{toc}，可以设置目录为单栏（\lstinline{onecol}）和双栏（\lstinline{twocol}）显示，比如双栏显示可以使用
-% \begin{lstlisting}
-% \documentclass[twocol]{elegantbook}
-% \documentclass[toc=twocol]{elegantbook}
-% \end{lstlisting}
-
-% 默认本模板目录深度为 1，你可以在导言区使用
-% \begin{lstlisting}
-% \setcounter{tocdepth}{2}
-% \end{lstlisting}
-% 将其修改为 2 级目录（章与节）显示。
-
-
-
-% \section{章节摘要}
-% 模板新增了一个章节摘要环境（introduction），使用示例
-% \begin{lstlisting}
-% \begin{introduction}
-%   \item Definition of Theorem
-%   \item Ask for help
-%   \item Optimization Problem
-%   \item Property of Cauchy Series
-%   \item Angle of Corner
-% \end{introduction}
-% \end{lstlisting}
-% 效果如下：
-% \begin{introduction}
-%   \item Definition of Theorem
-%   \item Ask for help
-%   \item Optimization Problem
-%   \item Property of Cauchy Series
-%   \item Angle of Corner
-% \end{introduction}
-
-% 环境的标题文字可以通过这个环境的可选参数进行修改，修改方法为：
-% \begin{lstlisting}
-% \begin{introduction}[Brief Introduction]
-% ...
-% \end{introduction}
-% \end{lstlisting}
-
-
-
-% \section{章后习题}
-% 前面我们介绍了例题和练习两个环境，这里我们再加一个，章后习题（\lstinline{problemset}）环境，用于在每一章结尾，显示本章的练习。使用方法如下
-
-% \begin{lstlisting}
-% \begin{problemset}
-%   \item exercise 1
-%   \item exercise 2
-%   \item exercise 3
-% \end{problemset}
-% \end{lstlisting}
-
-
-% 效果如下：
-% \begin{problemset}
-%   \item exercise 1
-%   \item exercise 2
-%   \item exercise 3
-%   \item 测试数学公式
-%   \begin{equation}
-%     a^2+b^2=c_{2_{i}} (1,2) [1,23]
-%   \end{equation}
-% \end{problemset}
-
-% \begin{remark}
-% 如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
-% \end{remark}
-
-% \begin{solution}
-% 如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
-% \end{solution}
-
-
-
-% \section{旁注}
-
-% 在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！不过我们保留了 \lstinline{marginpar} 这个选项，你可以使用 \lstinline{marginpar=margintrue} 获得保留右侧旁注的版面设计。然后使用系统自带的 \lstinline{\marginpar} 或者 \lstinline{marginnote} 宏包的 \lstinline{\marginnote} 命令。
-
-% \begin{remark}
-% 在使用旁注的时候，需要注意的是，文本和公式可以直接在旁注中使用。
-
-% \begin{lstlisting}
-% % text
-% \marginpar{margin paragraph text}
-
-% % equation
-% \marginpar{
-%   \begin{equation}
-%     a^2 + b^2 = c^2
-%   \end{equation}
-% }
-% \end{lstlisting}
-
-% 但是浮动体（表格、图片）需要注意，不能用浮动体环境，需要使用直接插图命令或者表格命令环境。然后使用 \lstinline{\captionof} 为其设置标题。为了得到居中的图表，可以使用 \lstinline{\centerline} 命令或者 \lstinline{center} 环境。更多详情请参考：\href{https://tex.stackexchange.com/questions/5583/caption-of-figure-in-marginpar-and-caption-of-wrapfigure-in-margin}{Caption of Figure in Marginpar}。
-
-% \begin{lstlisting}
-% % graph with centerline command
-% \marginpar{
-%   \centerline{
-%     \includegraphics[width=0.2\textwidth]{logo.png}
+% \begin{algorithm}\label{alg:test}
+%   \Input{A bitmap $I$ of size $w \times l$}
+%   \Output{A partition of the bitmap}
+%   \BlankLine
+%   \emph{special treatment of the first line}\;
+%   \For{$i \leftarrow 2$ \KwTo $l$}{
+%     \emph{special treatment of the first element of line $i$}\;
+%     \For{$j \leftarrow 2$ \KwTo $w$}{\label{forins}
+%       $\Left \leftarrow \FindCompress{$I[i,j-1]$}$\;
+%       $\Up \leftarrow \FindCompress{$I[i-1,]$}$\;
+%       $\This \leftarrow \FindCompress{$I[i,j]$}$\;
+%       \If(\tcp*[h]{O(\Left,\This)==1}){\Left compatible with \This}{\label{lt}
+%         \lIf{$\Left < \This$}{$\Union{\Left,\This}$}
+%         \lElse{$\Union{\This,\Left}$}
+%       }
+%       \If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
+%         \lIf{$\Up < \This$}{$\Union{\Up,\This}$}
+%         \tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
+%         \lElse{$\Union{\This,\Up}$}\tcp*[r]{\This{} linked to \Up}\label{lelse}
+%       }
+%     }
+%     \lForEach{element $e$ of the line $i$}{\FindCompress{p}}
 %   }
-%   \captionof{figure}{your figure caption}
-% }
-
-% % graph with center environment
-% \marginpar{
-%   \begin{center}
-%     \includegraphics[width=0.2\textwidth]{logo.png}
-%     \captionof{figure}{your figure caption}
-%   \end{center}
-% }
-% \end{lstlisting}
-
-% \end{remark}
+%   \caption{disjoint decomposition}\label{algo_disjdecomp}
+% \end{algorithm}
 
 
+\subsection{修改计数器}
 
-% \section{数学字体选项}
+当前定理等环境计数器按章计数，如果想修改定理类环境按节计数，可以修改计数器选项 thmcnt：
 
-% 本模板定义了一个数学字体选项（\lstinline{math}），可选项有三个：
-% \begin{enumerate}
-%   \item \lstinline{math=cm}（默认），使用 \LaTeX{} 默认数学字体（推荐，无需声明）；
-%   \item \lstinline{math=newtx}，使用 \lstinline{newtxmath} 设置数学字体（潜在问题比较多）。
-%   \item \lstinline{math=mtpro2}，使用 \lstinline{mtpro2} 宏包设置数学字体，要求用户已经成功安装此宏包。
-% \end{enumerate}
-
+\begin{lstlisting}
+  \documentclass[section]{elegantbook} %or
+  \documentclass[thmcnt=section]{elegantbook}
+\end{lstlisting}
 
 
-% \section{使用 newtx 系列字体}
+\subsection{其他环境的使用}
 
-% 如果需要使用原先版本的 \lstinline{newtx} 系列字体，可以通过显示声明数学字体：
+其他三种环境没有选项，可以直接使用，比如 \lstinline{example} 环境的使用方法与效果：
+\begin{lstlisting}
+\begin{example}
+   This is the content of example environment.
+\end{example}
+\end{lstlisting}
 
-% \begin{lstlisting}
-% \documentclass[math=newtx]{elegantbook}
-% \end{lstlisting}
+这几个都是同一类环境，区别在于
 
-% \subsection{连字符}
+\begin{itemize}
+  \item 示例环境（example）、练习（exercise）与例题（problem）章节自动编号；
+  \item 注意（note），练习（exercise）环境有提醒引导符；
+  \item 结论（conclusion）等环境都是普通段落环境，引导词加粗。
+\end{itemize}
 
-% 如果使用 \lstinline{newtx} 系列字体宏包，需要注意下连字符的问题。
-% \begin{equation}
-%   \int_{R^q} f(x,y) dy.\emph{of\kern0pt f}
-% \end{equation}
-% 的代码为
-% \begin{lstlisting}
-% \begin{equation}
-%   \int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
-% \end{equation}
-% \end{lstlisting}
-
-% \subsection{宏包冲突}
-
-% 另外在 3.08 版本中，有用户反馈模板在和 \lstinline{yhmath} 以及 \lstinline{esvect} 等宏包搭配使用的时候会出现报错：
-% \begin{lstlisting}
-% LaTeX Error:
-%    Too many symbol fonts declared.
-% \end{lstlisting}
-
-% 原因是在使用 \lstinline{newtxmath} 宏包时，重新定义了数学字体用于大型操作符，达到了 {\heiti 最多 16 个数学字体} 的上限，在调用其他宏包的时候，无法新增数学字体。为了减少调用非常用宏包，在此给出如何调用 \lstinline{yhmath} 以及 \lstinline{esvect} 宏包的方法。
-
-% 请在 \lstinline{elegantbook.cls} 内搜索 \lstinline{yhmath} 或者 \lstinline{esvect}，将你所需要的宏包加载语句\textit{取消注释}即可。
-% \begin{lstlisting}
-% %%% use yhmath pkg, uncomment following code
-% % \let\oldwidering\widering
-% % \let\widering\undefined
-% % \RequirePackage{yhmath}
-% % \let\widering\oldwidering
-
-% %%% use esvect pkg, uncomment following code
-% % \RequirePackage{esvect}
-% \end{lstlisting}
+\section{列表环境}
+本模板借助于 \lstinline{tikz} 定制了 \lstinline{itemize} 和 \lstinline{enumerate} 环境，其中 \lstinline{itemize} 环境修改了 3 层嵌套，而 \lstinline{enumerate} 环境修改了 4 层嵌套（仅改变颜色）。示例如下\\[2ex]
+\begin{minipage}[b]{0.49\textwidth}
+  \begin{itemize}
+    \item first item of nesti;
+    \item second item of nesti;
+      \begin{itemize}
+        \item first item of nestii;
+        \item second item of nestii;
+        \begin{itemize}
+          \item first item of nestiii;
+          \item second item of nestiii.
+        \end{itemize}   
+      \end{itemize}
+  \end{itemize}
+\end{minipage}
+\begin{minipage}[b]{0.49\textwidth}
+  \begin{enumerate}
+    \item first item of nesti;
+    \item second item of nesti;
+      \begin{enumerate}
+        \item first item of nestii;
+        \item second item of nestii;
+        \begin{enumerate}
+          \item first item of nestiii;
+          \item second item of nestiii.
+        \end{enumerate}   
+      \end{enumerate}
+  \end{enumerate}
+\end{minipage}
 
 
 
-% \section{中文字体选项}
-% 模板从 3.10 版本提供中文字体选项 \lstinline{chinesefont}，可选项有
-% \begin{enumerate}
-% \item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
-% \item \lstinline{founder}：方正字体选项（\textbf{需要安装方正字体}），后台调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文，用户只需要安装方正字体即可使用该选项。
-% \item \lstinline{nofont}：后台会调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
-% \end{enumerate}
+\section{参考文献}
+文献部分，本模板调用了 biblatex 宏包，并提供了 biber（默认） 和 bibtex 两个后端选项，可以使用 \lstinline{bibend} 进行修改：
 
-% \subsection{方正字体选项}
-% 由于使用 \lstinline{ctex} 宏包默认调用系统已有的字体，部分系统字体缺失严重，因此，用户希望能够使用其它字体，我们推荐使用方正字体。方正的{\songti 方正书宋}、{\heiti 方正黑体}、{\kaishu 方正楷体}、{\fangsong 方正仿宋}四款字体均可免费试用，且可用于商业用途。用户可以自行从\href{http://www.foundertype.com/}{方正字体官网}下载此四款字体，在下载的时候请\textbf{务必}注意选择 GBK 字符集，也可以使用 \href{https://www.latexstudio.net/}{\LaTeX{} 工作室}提供的\href{https://pan.baidu.com/s/1BgbQM7LoinY7m8yeP25Y7Q}{方正字体，提取码为：njy9} 进行安装。安装时，{\kaishu Win 10 用户请右键选择为全部用户安装，否则会找不到字体。}
+\begin{lstlisting}
+  \documentclass[bibtex]{elegantbook}
+  \documentclass[bibend=bibtex]{elegantbook}
+\end{lstlisting}
 
-% \begin{figure}[!htb]
-% \centering
-% \includegraphics[width=0.9\textwidth]{founder.png}
-% \end{figure}
+关于文献条目（bib item），你可以在谷歌学术，Mendeley，Endnote 中取，然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。
 
-% \subsection{其他中文字体}
-% 如果你想完全自定义字体\footnote{这里仍然以方正字体为例。}，你可以选择 \lstinline{chinesefont=nofont}，然后在导言区设置
-% \begin{lstlisting}
-% \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
-% \setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
-% \setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
-% \setCJKfamilyfont{zhsong}{FZShuSong-Z01}
-% \setCJKfamilyfont{zhhei}{FZHei-B01}
-% \setCJKfamilyfont{zhkai}[BoldFont={FZHei-B01}]{FZKai-Z03}
-% \setCJKfamilyfont{zhfs}[BoldFont={FZHei-B01}]{FZFangSong-Z02}
-% \newcommand*{\songti}{\CJKfamily{zhsong}}
-% \newcommand*{\heiti}{\CJKfamily{zhhei}}
-% \newcommand*{\kaishu}{\CJKfamily{zhkai}}
-% \newcommand*{\fangsong}{\CJKfamily{zhfs}}
-% \end{lstlisting}
+为了方便文献样式修改，模板引入了 \lstinline{bibstyle} 和 \lstinline{citestyle} 选项，默认均为数字格式（numeric），参考文献示例：\cite{cn1,en2,en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
+
+如果需要设置为国标 GB7714-2015，需要使用：
+\begin{lstlisting}
+  \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
+\end{lstlisting}
+
+如果需要添加排序方式，可以在导言区加入
+\begin{lstlisting}
+  \ExecuteBibliographyOptions{sorting=ynt}
+\end{lstlisting}
+
+启用国标之后，可以加入 \lstinline{sorting=gb7714-2015}。
 
 
 
-% \section{积分的定义}
+\section{添加序章}
 
-% 我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
-
-% \begin{definition}[可积性] \label{def:int} 
-% 设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的\textbf{非负简单函数}，中文其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
-% \begin{equation}
-%    \label{inter}
-%    \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
-% \end{equation}
-% 一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
-% \end{definition}
+如果你想在第一章前面添序章，不改变原本章节序号，可以在第一章内容前面使用 
+\begin{lstlisting}
+\chapter*{Introduction}
+\markboth{Introduction}{Introduction}
+The content of introduction.
+\end{lstlisting}
 
 
 
-% \begin{exercise}\label{exer:43}
-% 设 $f \notin\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
-% \begin{equation}
-%    \label{ex:1}
-%    I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
-% \end{equation}
-% 是 $\mathcal{R}^1$ 上的连续函数。 
-% \end{exercise}
+\section{目录选项与深度}
+本模板添加了一个目录选项 \lstinline{toc}，可以设置目录为单栏（\lstinline{onecol}）和双栏（\lstinline{twocol}）显示，比如双栏显示可以使用
+\begin{lstlisting}
+\documentclass[twocol]{elegantbook}
+\documentclass[toc=twocol]{elegantbook}
+\end{lstlisting}
 
-% \begin{solution}
-% 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
-% \end{solution}
-
-% \begin{proof}
-% 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
-% \end{proof}
-
-% \begin{theorem}[Fubini 定理] \label{thm:fubi} 
-% （1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
-% \begin{equation}
-%    \label{eq:461}
-%    \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
-% \end{equation}
-
-% （2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\ref{eq:461} 成立。
-% \end{theorem}
-
-% \ref{thm:fubi}
-
-% \begin{note}
-% 在本模板中，引理（lemma），推论（corollary）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
-% \end{note}
-
-% \begin{proposition}[最优性原理] \label{pro:max}
-% 如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s, T]$ 任意子区间都是最优解，假设区间为 $[t_0, t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
-% \end{proposition}
-
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=0.6\textwidth]{scatter.jpg}
-%   \caption{散点图示例 $\hat{y}=a+bx$ \label{fig:scatter}}
-% \end{figure}
-
-% 以最简单的一元线性模型来解释最小二乘法。什么是一元线性模型呢？监督学习中，如果预测的变量是离散的，我们称其为分类（如决策树，支持向量机等），如果预测的变量是连续的，我们称其为回归。回归分析中，如果只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。对于二维空间线性是一条直线；对于三维空间线性是一个平面，对于多维空间线性是一个超平面。
-
-% \begin{property}\label{property:cauchy}
-% 柯西列的性质
-% \begin{enumerate}
-% \item $\{x_k\}$ 是柯西列，则其子列 $\{x_k^i\}$ 也是柯西列。
-% \item $x_k\in \mathcal{R}^n$，$\rho(x,y)$ 是欧几里得空间，则柯西列收敛，$(\mathcal{R}^n,\rho)$ 空间是完备的。
-% \end{enumerate}
-% \end{property}
-
-% \begin{conclusion}
-% 回归分析（regression analysis) 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
-% \end{conclusion}
+默认本模板目录深度为 1，你可以在导言区使用
+\begin{lstlisting}
+\setcounter{tocdepth}{2}
+\end{lstlisting}
+将其修改为 2 级目录（章与节）显示。
 
 
 
-% \section{模板颜色主题}
-% 本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
-% \begin{lstlisting}
-% \documentclass[green]{elegantbook} %or
-% \documentclass[color=green]{elegantbook}
-% \end{lstlisting}
+\section{章节摘要}
+模板新增了一个章节摘要环境（introduction），使用示例
+\begin{lstlisting}
+\begin{introduction}
+  \item Definition of Theorem
+  \item Ask for help
+  \item Optimization Problem
+  \item Property of Cauchy Series
+  \item Angle of Corner
+\end{introduction}
+\end{lstlisting}
+效果如下：
+\begin{introduction}
+  \item Definition of Theorem
+  \item Ask for help
+  \item Optimization Problem
+  \item Property of Cauchy Series
+  \item Angle of Corner
+\end{introduction}
 
-% \begin{table}[htbp]
-%   \caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
-%   \centering
-%   \begin{tabular}{ccccccc}
-%   \toprule
-%     & \textcolor{structure1}{green} 
-%     & \textcolor{structure2}{cyan} 
-%     & \textcolor{structure3}{blue}
-%     & \textcolor{structure4}{gray} 
-%     & \textcolor{structure5}{black} 
-%     & 主要使用的环境\\
-%   \midrule
-%     structure & \ccr{structure1}
-%     & \ccr{structure2}
-%     & \ccr{structure3} 
-%     & \ccr{structure4} 
-%     & \ccr{structure5} 
-%     & chapter \ section \ subsection \\
-%     main      & \ccr{main1}
-%     & \ccr{main2}
-%     & \ccr{main3}
-%     & \ccr{main4}
-%     & \ccr{main5}
-%     & definition \ exercise \ problem \\
-%     second    & \ccr{second1}
-%     & \ccr{second2}
-%     & \ccr{second3}
-%     & \ccr{second4}
-%     & \ccr{second5}
-%     & theorem \ lemma \ corollary\\
-%     third     & \ccr{third1}
-%     & \ccr{third2}
-%     & \ccr{third3}
-%     & \ccr{third4}
-%     & \ccr{third5}
-%     & proposition\\
-%   \bottomrule
-%   \end{tabular}
-% \end{table}
-
-% 如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structurecolor、main、second、third 颜色，具体方法如下：
-% \begin{lstlisting}[tabsize=4]
-% \definecolor{structurecolor}{RGB}{0,0,0}
-% \definecolor{main}{RGB}{70,70,70}    
-% \definecolor{second}{RGB}{115,45,2}    
-% \definecolor{third}{RGB}{0,80,80}
-% \end{lstlisting}
+环境的标题文字可以通过这个环境的可选参数进行修改，修改方法为：
+\begin{lstlisting}
+\begin{introduction}[Brief Introduction]
+...
+\end{introduction}
+\end{lstlisting}
 
 
 
-% \section{常见问题}
+\section{章后习题}
+前面我们介绍了例题和练习两个环境，这里我们再加一个，章后习题（\lstinline{problemset}）环境，用于在每一章结尾，显示本章的练习。使用方法如下
 
-% \begin{enumerate}[itemsep=1.5ex]
-%   \item \question{有没有办法章节用“第一章，第一节，（一）”这种？}
-%     见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
-%   \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
-%     页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
-%   \item \question{\lstinline[breaklines]{Package ctex Error: CTeX fontset 'Mac' is unavailable.}}
-%     在 Mac 系统下，中文编译请使用 \hologo{XeLaTeX}。
-%   \item \question{\lstinline{! LaTeX Error: Unknown option 'scheme=plain' for package 'ctex'.}}
-%     你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2022。
-%   \item \question{我该使用什么版本？}
-%     请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2021 内获取。
-%   \item \question{我该使用什么编辑器？}
-%     你可以使用 \TeX{} Live 2021 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2021 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
-%   \item \question{您好，我们想用您的 ElegantBook 模板写一本书。关于机器学习的教材，希望获得您的授权，谢谢您的宝贵时间。}
-%     模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
-%   \item \question{请问交叉引用是什么？}
-%     本群和本模板适合有一定 \LaTeX{} 基础的用户使用，新手请先学习 \LaTeX{} 的基础，理解各种概念，否则你将寸步难行。
-%   \item \question{代码高亮环境能用其他语言吗？}
-%     可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lsset} 命令，更多信息请参考宏包文档。
-%   \item \question{群主，什么时候出 Beamer 的模板（主题），ElegantSlide 或者 ElegantBeamer？}
-%     由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。后续确定不会再出任何主题/模板，请大家根据需要修改已有主题。
-% \end{enumerate}
+\begin{lstlisting}
+\begin{problemset}
+  \item exercise 1
+  \item exercise 2
+  \item exercise 3
+\end{problemset}
+\end{lstlisting}
+
+
+效果如下：
+\begin{problemset}
+  \item exercise 1
+  \item exercise 2
+  \item exercise 3
+  \item 测试数学公式
+  \begin{equation}
+    a^2+b^2=c_{2_{i}} (1,2) [1,23]
+  \end{equation}
+\end{problemset}
+
+\begin{remark}
+如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
+\end{remark}
+
+\begin{solution}
+如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
+\end{solution}
+
+
+
+\section{旁注}
+
+在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！不过我们保留了 \lstinline{marginpar} 这个选项，你可以使用 \lstinline{marginpar=margintrue} 获得保留右侧旁注的版面设计。然后使用系统自带的 \lstinline{\marginpar} 或者 \lstinline{marginnote} 宏包的 \lstinline{\marginnote} 命令。
+
+\begin{remark}
+在使用旁注的时候，需要注意的是，文本和公式可以直接在旁注中使用。
+
+\begin{lstlisting}
+% text
+\marginpar{margin paragraph text}
+
+% equation
+\marginpar{
+  \begin{equation}
+    a^2 + b^2 = c^2
+  \end{equation}
+}
+\end{lstlisting}
+
+但是浮动体（表格、图片）需要注意，不能用浮动体环境，需要使用直接插图命令或者表格命令环境。然后使用 \lstinline{\captionof} 为其设置标题。为了得到居中的图表，可以使用 \lstinline{\centerline} 命令或者 \lstinline{center} 环境。更多详情请参考：\href{https://tex.stackexchange.com/questions/5583/caption-of-figure-in-marginpar-and-caption-of-wrapfigure-in-margin}{Caption of Figure in Marginpar}。
+
+\begin{lstlisting}
+% graph with centerline command
+\marginpar{
+  \centerline{
+    \includegraphics[width=0.2\textwidth]{logo.png}
+  }
+  \captionof{figure}{your figure caption}
+}
+
+% graph with center environment
+\marginpar{
+  \begin{center}
+    \includegraphics[width=0.2\textwidth]{logo.png}
+    \captionof{figure}{your figure caption}
+  \end{center}
+}
+\end{lstlisting}
+
+\end{remark}
+
+
+
+\section{数学字体选项}
+
+本模板定义了一个数学字体选项（\lstinline{math}），可选项有三个：
+\begin{enumerate}
+  \item \lstinline{math=cm}（默认），使用 \LaTeX{} 默认数学字体（推荐，无需声明）；
+  \item \lstinline{math=newtx}，使用 \lstinline{newtxmath} 设置数学字体（潜在问题比较多）。
+  \item \lstinline{math=mtpro2}，使用 \lstinline{mtpro2} 宏包设置数学字体，要求用户已经成功安装此宏包。
+\end{enumerate}
+
+
+
+\section{使用 newtx 系列字体}
+
+如果需要使用原先版本的 \lstinline{newtx} 系列字体，可以通过显示声明数学字体：
+
+\begin{lstlisting}
+\documentclass[math=newtx]{elegantbook}
+\end{lstlisting}
+
+\subsection{连字符}
+
+如果使用 \lstinline{newtx} 系列字体宏包，需要注意下连字符的问题。
+\begin{equation}
+  \int_{R^q} f(x,y) dy.\emph{of\kern0pt f}
+\end{equation}
+的代码为
+\begin{lstlisting}
+\begin{equation}
+  \int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
+\end{equation}
+\end{lstlisting}
+
+\subsection{宏包冲突}
+
+另外在 3.08 版本中，有用户反馈模板在和 \lstinline{yhmath} 以及 \lstinline{esvect} 等宏包搭配使用的时候会出现报错：
+\begin{lstlisting}
+LaTeX Error:
+   Too many symbol fonts declared.
+\end{lstlisting}
+
+原因是在使用 \lstinline{newtxmath} 宏包时，重新定义了数学字体用于大型操作符，达到了 {\heiti 最多 16 个数学字体} 的上限，在调用其他宏包的时候，无法新增数学字体。为了减少调用非常用宏包，在此给出如何调用 \lstinline{yhmath} 以及 \lstinline{esvect} 宏包的方法。
+
+请在 \lstinline{elegantbook.cls} 内搜索 \lstinline{yhmath} 或者 \lstinline{esvect}，将你所需要的宏包加载语句\textit{取消注释}即可。
+\begin{lstlisting}
+%%% use yhmath pkg, uncomment following code
+% \let\oldwidering\widering
+% \let\widering\undefined
+% \RequirePackage{yhmath}
+% \let\widering\oldwidering
+
+%%% use esvect pkg, uncomment following code
+% \RequirePackage{esvect}
+\end{lstlisting}
+
+
+
+\section{中文字体选项}
+模板从 3.10 版本提供中文字体选项 \lstinline{chinesefont}，可选项有
+\begin{enumerate}
+\item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
+\item \lstinline{founder}：方正字体选项（\textbf{需要安装方正字体}），后台调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文，用户只需要安装方正字体即可使用该选项。
+\item \lstinline{nofont}：后台会调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
+\end{enumerate}
+
+\subsection{方正字体选项}
+由于使用 \lstinline{ctex} 宏包默认调用系统已有的字体，部分系统字体缺失严重，因此，用户希望能够使用其它字体，我们推荐使用方正字体。方正的{\songti 方正书宋}、{\heiti 方正黑体}、{\kaishu 方正楷体}、{\fangsong 方正仿宋}四款字体均可免费试用，且可用于商业用途。用户可以自行从\href{http://www.foundertype.com/}{方正字体官网}下载此四款字体，在下载的时候请\textbf{务必}注意选择 GBK 字符集，也可以使用 \href{https://www.latexstudio.net/}{\LaTeX{} 工作室}提供的\href{https://pan.baidu.com/s/1BgbQM7LoinY7m8yeP25Y7Q}{方正字体，提取码为：njy9} 进行安装。安装时，{\kaishu Win 10 用户请右键选择为全部用户安装，否则会找不到字体。}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.9\textwidth]{founder.png}
+\end{figure}
+
+\subsection{其他中文字体}
+如果你想完全自定义字体\footnote{这里仍然以方正字体为例。}，你可以选择 \lstinline{chinesefont=nofont}，然后在导言区设置
+\begin{lstlisting}
+\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
+\setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
+\setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
+\setCJKfamilyfont{zhsong}{FZShuSong-Z01}
+\setCJKfamilyfont{zhhei}{FZHei-B01}
+\setCJKfamilyfont{zhkai}[BoldFont={FZHei-B01}]{FZKai-Z03}
+\setCJKfamilyfont{zhfs}[BoldFont={FZHei-B01}]{FZFangSong-Z02}
+\newcommand*{\songti}{\CJKfamily{zhsong}}
+\newcommand*{\heiti}{\CJKfamily{zhhei}}
+\newcommand*{\kaishu}{\CJKfamily{zhkai}}
+\newcommand*{\fangsong}{\CJKfamily{zhfs}}
+\end{lstlisting}
+
+
+
+\section{积分的定义}
+
+我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
+
+\begin{definition}[可积性] \label{def:int} 
+设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的\textbf{非负简单函数}，中文其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
+\begin{equation}
+   \label{inter}
+   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
+\end{equation}
+一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
+\end{definition}
+
+
+
+\begin{exercise}\label{exer:43}
+设 $f \notin\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
+\begin{equation}
+   \label{ex:1}
+   I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
+\end{equation}
+是 $\mathcal{R}^1$ 上的连续函数。 
+\end{exercise}
+
+\begin{solution}
+即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
+\end{solution}
+
+\begin{proof}
+即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
+\end{proof}
+
+
+
+\begin{theorem}[Fubini 定理] \label{thm:fubi} 
+（1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
+\begin{equation}
+   \label{eq:461}
+   \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
+\end{equation}
+
+（2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\ref{eq:461} 成立。
+\end{theorem}
+
+\ref{thm:fubi}
+
+
+
+\begin{note}
+在本模板中，引理（lemma），推论（corollary）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
+\end{note}
+
+\begin{proposition}[最优性原理] \label{pro:max}
+如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s, T]$ 任意子区间都是最优解，假设区间为 $[t_0, t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
+\end{proposition}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{scatter.jpg}
+  \caption{散点图示例 $\hat{y}=a+bx$ \label{fig:scatter}}
+\end{figure}
+
+以最简单的一元线性模型来解释最小二乘法。什么是一元线性模型呢？监督学习中，如果预测的变量是离散的，我们称其为分类（如决策树，支持向量机等），如果预测的变量是连续的，我们称其为回归。回归分析中，如果只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。对于二维空间线性是一条直线；对于三维空间线性是一个平面，对于多维空间线性是一个超平面。
+
+\begin{property}\label{property:cauchy}
+柯西列的性质
+\begin{enumerate}
+\item $\{x_k\}$ 是柯西列，则其子列 $\{x_k^i\}$ 也是柯西列。
+\item $x_k\in \mathcal{R}^n$，$\rho(x,y)$ 是欧几里得空间，则柯西列收敛，$(\mathcal{R}^n,\rho)$ 空间是完备的。
+\end{enumerate}
+\end{property}
+
+\begin{conclusion}
+回归分析（regression analysis) 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
+\end{conclusion}
+
+
+
+\section{模板颜色主题}
+本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
+\begin{lstlisting}
+\documentclass[green]{elegantbook} %or
+\documentclass[color=green]{elegantbook}
+\end{lstlisting}
+
+\begin{table}[htbp]
+  \caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
+  \centering
+  \begin{tabular}{ccccccc}
+  \toprule
+    & \textcolor{structure1}{green} 
+    & \textcolor{structure2}{cyan} 
+    & \textcolor{structure3}{blue}
+    & \textcolor{structure4}{gray} 
+    & \textcolor{structure5}{black} 
+    & 主要使用的环境\\
+  \midrule
+    structure & \ccr{structure1}
+    & \ccr{structure2}
+    & \ccr{structure3} 
+    & \ccr{structure4} 
+    & \ccr{structure5} 
+    & chapter \ section \ subsection \\
+    main      & \ccr{main1}
+    & \ccr{main2}
+    & \ccr{main3}
+    & \ccr{main4}
+    & \ccr{main5}
+    & definition \ exercise \ problem \\
+    second    & \ccr{second1}
+    & \ccr{second2}
+    & \ccr{second3}
+    & \ccr{second4}
+    & \ccr{second5}
+    & theorem \ lemma \ corollary\\
+    third     & \ccr{third1}
+    & \ccr{third2}
+    & \ccr{third3}
+    & \ccr{third4}
+    & \ccr{third5}
+    & proposition\\
+  \bottomrule
+  \end{tabular}
+\end{table}
+
+如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structurecolor、main、second、third 颜色，具体方法如下：
+\begin{lstlisting}[tabsize=4]
+\definecolor{structurecolor}{RGB}{0,0,0}
+\definecolor{main}{RGB}{70,70,70}    
+\definecolor{second}{RGB}{115,45,2}    
+\definecolor{third}{RGB}{0,80,80}
+\end{lstlisting}
+
+
+
+\section{常见问题}
+
+\begin{enumerate}[itemsep=1.5ex]
+  \item \question{有没有办法章节用“第一章，第一节，（一）”这种？}
+    见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
+  \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
+    页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
+  \item \question{\lstinline[breaklines]{Package ctex Error: CTeX fontset 'Mac' is unavailable.}}
+    在 Mac 系统下，中文编译请使用 \hologo{XeLaTeX}。
+  \item \question{\lstinline{! LaTeX Error: Unknown option 'scheme=plain' for package 'ctex'.}}
+    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2022。
+  \item \question{我该使用什么版本？}
+    请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2021 内获取。
+  \item \question{我该使用什么编辑器？}
+    你可以使用 \TeX{} Live 2021 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2021 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
+  \item \question{您好，我们想用您的 ElegantBook 模板写一本书。关于机器学习的教材，希望获得您的授权，谢谢您的宝贵时间。}
+    模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
+  \item \question{请问交叉引用是什么？}
+    本群和本模板适合有一定 \LaTeX{} 基础的用户使用，新手请先学习 \LaTeX{} 的基础，理解各种概念，否则你将寸步难行。
+  \item \question{代码高亮环境能用其他语言吗？}
+    可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lsset} 命令，更多信息请参考宏包文档。
+  \item \question{群主，什么时候出 Beamer 的模板（主题），ElegantSlide 或者 ElegantBeamer？}
+    由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。后续确定不会再出任何主题/模板，请大家根据需要修改已有主题。
+\end{enumerate}
 
 
 
