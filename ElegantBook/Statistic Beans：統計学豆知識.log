@@ -1,10 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.5) (preloaded format=xelatex 2026.6.21)  30 JUL 2026 14:39
+This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.5) (preloaded format=xelatex 2026.6.21)  29 AUG 2026 09:05
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**"d:/ZesProjects/LaTeX/ElegantBook_Template/Statistic Beans：統計学豆知識.tex"
-(d:/ZesProjects/LaTeX/ElegantBook_Template/Statistic Beans：統計学豆知識.tex
+**"./Statistic Beans：統計学豆知識.tex"
+(Statistic Beans：統計学豆知識.tex
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-05-26>
 (elegantbook.cls
@@ -1736,37 +1735,150 @@ Package tocloft Info: The document has chapter divisions on input line 51.
 )
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 10.0pt on input line 1331.
+) (D:\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowinset=\dimen365
+\pgfarrowlength=\dimen366
+\pgfarrowwidth=\dimen367
+\pgfarrowlinewidth=\dimen368
 )
+(D:\MiKTeX\tex/latex/pgfplots\pgfplots.sty
+(D:\MiKTeX\tex/generic/pgfplots\pgfplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
+
+(D:\MiKTeX\tex/generic/pgfplots\pgfplots.code.tex
+(D:\MiKTeX\tex/generic/pgfplots\pgfplotscore.code.tex
+\t@pgfplots@toka=\toks46
+\t@pgfplots@tokb=\toks47
+\t@pgfplots@tokc=\toks48
+\pgfplots@tmpa=\dimen369
+\c@pgfplots@coordindex=\count582
+\c@pgfplots@scanlineindex=\count583
+
+(D:\MiKTeX\tex/generic/pgfplots/sys\pgfplotssysgeneric.code.tex))
+(D:\MiKTeX\tex/generic/pgfplots/libs\pgfplotslibrary.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots/oldpgfcompatib\pgfplotsoldpgfsupp_loader.code.t
+ex (D:\MiKTeX\tex/generic/pgf/libraries\pgflibraryfpu.code.tex)
+Package pgfplots: loading complementary utilities for your pgf version...
+\t@pgf@toka=\toks49
+\t@pgf@tokb=\toks50
+\t@pgf@tokc=\toks51
+
+(D:\MiKTeX\tex/generic/pgfplots/oldpgfcompatib\pgfplotsoldpgfsupp_pgfutil-commo
+n-lists.tex)) (D:\MiKTeX\tex/generic/pgfplots/util\pgfplotsutil.code.tex
+(D:\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsliststructure.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsliststructureext.code.tex
+) (D:\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count584
+)
+(D:\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsmatrix.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots/numtable\pgfplotstableshared.code.tex
+\c@pgfplotstable@counta=\count585
+\t@pgfplotstable@a=\toks52
+)
+(D:\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsdeque.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots/util\pgfplotsbinary.code.tex
+(D:\MiKTeX\tex/generic/pgfplots/util\pgfplotsbinary.data.code.tex))
+(D:\MiKTeX\tex/generic/pgfplots/util\pgfplotsutil.verb.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots/libs\pgflibrarypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count586
+
+(D:\MiKTeX\tex/generic/pgfplots/sys\pgflibrarypgfplots.surfshading.pgfsys-xetex
+.def
+(D:\MiKTeX\tex/generic/pgfplots/sys\pgflibrarypgfplots.surfshading.pgfsys-dvipd
+fmx.def
+\c@pgfplotslibrarysurf@streamlen=\count587
+)))) (D:\MiKTeX\tex/generic/pgfplots/util\pgfplotscolormap.code.tex
+(D:\MiKTeX\tex/generic/pgfplots/util\pgfplotscolor.code.tex))
+(D:\MiKTeX\tex/generic/pgfplots\pgfplotsstackedplots.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots\pgfplotsplothandlers.code.tex
+(D:\MiKTeX\tex/generic/pgfplots\pgfplotsmeshplothandler.code.tex
+(D:\MiKTeX\tex/generic/pgfplots\pgfplotsmeshplotimage.code.tex)))
+(D:\MiKTeX\tex/generic/pgfplots\pgfplots.scaling.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots\pgfplotscoordprocessing.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots\pgfplots.errorbars.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots\pgfplots.markers.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots\pgfplotsticks.code.tex)
+(D:\MiKTeX\tex/generic/pgfplots\pgfplots.paths.code.tex)
+(D:\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.
+code.tex (D:\MiKTeX\tex/generic/pgf/modules\pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen370
+\pgfdecoratedremainingdistance=\dimen371
+\pgfdecoratedinputsegmentcompleteddistance=\dimen372
+\pgfdecoratedinputsegmentremainingdistance=\dimen373
+\pgf@decorate@distancetomove=\dimen374
+\pgf@decorate@repeatstate=\count588
+\pgfdecorationsegmentamplitude=\dimen375
+\pgfdecorationsegmentlength=\dimen376
+)
+\tikz@lib@dec@box=\box138
+)
+(D:\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.
+pathmorphing.code.tex
+(D:\MiKTeX\tex/generic/pgf/libraries/decorations\pgflibrarydecorations.pathmorp
+hing.code.tex))
+(D:\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.
+pathreplacing.code.tex
+(D:\MiKTeX\tex/generic/pgf/libraries/decorations\pgflibrarydecorations.pathrepl
+acing.code.tex))
+(D:\MiKTeX\tex/generic/pgfplots/libs\tikzlibrarypgfplots.contourlua.code.tex)
+\pgfplots@numplots=\count589
+\pgfplots@xmin@reg=\dimen377
+\pgfplots@xmax@reg=\dimen378
+\pgfplots@ymin@reg=\dimen379
+\pgfplots@ymax@reg=\dimen380
+\pgfplots@zmin@reg=\dimen381
+\pgfplots@zmax@reg=\dimen382
+)
+(D:\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryplotmarks.co
+de.tex
+File: tikzlibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+ (D:\MiKTeX\tex/generic/pgf/libraries\pgflibraryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)))
+(D:\MiKTeX\tex/generic/pgfplots/libs\tikzlibrarypgfplots.statistics.code.tex)
+(D:\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count590
+\float@exts=\toks53
+\float@box=\box139
+\@float@everytoks=\toks54
+\@floatcapt=\box140
+)
+DEBUG twoside = YES
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 (Statistic Beans：統計学豆知識.aux
 
 LaTeX Warning: Label `def:\NoValue ' multiply defined.
 
+
+LaTeX Warning: Label `def:\NoValue ' multiply defined.
+
 )
 \openout1 = `"Statistic Beans：統計学豆知識.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-Package hyperref Info: Link coloring ON on input line 30.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+Package hyperref Info: Link coloring ON on input line 43.
  (Statistic Beans：統計学豆知識.out) (Statistic Beans：統計学豆知識.out)
 \@outlinefile=\write7
 \openout7 = `"Statistic Beans：統計学豆知識.out"'.
@@ -1779,7 +1891,7 @@ Package hyperref Info: Link coloring ON on input line 30.
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: 
+* modes: twoside 
 * h-part:(L,W,R)=(56.9055pt, 483.69687pt, 56.9055pt)
 * v-part:(T,H,B)=(72.26997pt, 700.5069pt, 72.26997pt)
 * \paperwidth=597.50787pt
@@ -1801,18 +1913,19 @@ Package hyperref Info: Link coloring ON on input line 30.
 * \voffset=0.0pt
 * \mag=1000
 * \@twocolumnfalse
-* \@twosidefalse
-* \@mparswitchfalse
+* \@twosidetrue
+* \@mparswitchtrue
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 (D:\MiKTeX\tex/latex/footmisc\footmisc.sty
 Package: footmisc 2025/05/09 v7.0b a miscellany of footnote facilities
-\FN@temptoken=\toks46
-\footnotemargin=\dimen365
+\FN@temptoken=\toks55
+\footnotemargin=\dimen383
 Package footmisc Info: Declaring symbol style bringhurst on input line 549.
 Package footmisc Info: Declaring symbol style chicago on input line 557.
 Package footmisc Info: Declaring symbol style wiley on input line 566.
@@ -1838,10 +1951,13 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file '"Statistic Beans：統計学豆知識".bbl' not found.
 
 No file "Statistic Beans：統計学豆知識".bbl.
-Package biblatex Info: Reference section=0 on input line 30.
-Package biblatex Info: Reference segment=0 on input line 30.
-\c@lstlisting=\count582
-Package hyperref Info: Option `pageanchor' set `false' on input line 32.
+Package biblatex Info: Reference section=0 on input line 43.
+Package biblatex Info: Reference segment=0 on input line 43.
+\c@lstlisting=\count591
+Package pgfplots notification 'compat/show suggested version=true': document ha
+s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
+
+Package hyperref Info: Option `pageanchor' set `false' on input line 45.
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: xetex
 * paper: a4paper
@@ -1877,54 +1993,54 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 32.
 File: ./figure/cover.jpg Graphic file (type bmp)
 <./figure/cover.jpg>
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
-(Font)              scaled to size 24.88pt on input line 32.
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 32
+(Font)              scaled to size 24.88pt on input line 45.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 45
 .
 (D:\MiKTeX\tex/latex/jknappen\ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 32.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
 
  (D:\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 32.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
 
 
 (D:\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 32.
+(Font)              scaled to size 14.4pt on input line 45.
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 32.
+(Font)              scaled to size 7.0pt on input line 45.
  [1
 
 
 
 ]
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 41.
+(Font)              scaled to size 12.0pt on input line 54.
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 41.
+(Font)              scaled to size 12.0pt on input line 54.
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/it' will be
-(Font)              scaled to size 12.0pt on input line 41.
+(Font)              scaled to size 12.0pt on input line 54.
  [1
 
 
+] [2
+
 ]
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 46.
+(Font)              scaled to size 17.28pt on input line 59.
  (Statistic Beans：統計学豆知識.toc
-[2
-
-])
+[3])
 \tf@toc=\write8
 \openout8 = `"Statistic Beans：統計学豆知識.toc"'.
 
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
- [3]
+(Font)              scaled to size 9.0pt on input line 60.
+ [4]
 Chapter 1.
 [1
 
@@ -1937,158 +2053,27 @@ Chapter 2.
 Chapter 3.
 [5
 
+] [6] [7] [8
+
 ]
 Chapter 4.
-LaTeX Font Info:    Trying to load font information for U+ding on input line 24
-3.
-(D:\MiKTeX\tex/latex/bbding\uding.fd
-File: Uding.fd 1996/02/01 v1.0 BBding font definitions
-) [6
+[9]
+Package pgfplots info on input line 435: Using 'lua backend=false' for axis: x 
+coord trafo unsupported.
+ [10] [11] [12] [13] [14
 
 ]
 Chapter 5.
-[7
-
-]
+[15] [16] [17] [18] [19] [20]
 Chapter 6.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 306.
+(hyperref)                removing `math shift' on input line 952.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 306.
+(hyperref)                removing `math shift' on input line 952.
 
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 314.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 314.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 318.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\chi' on input line 318.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 318.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 318.
-
-[8
+[21
 
 ]
-Chapter 7.
-[9
-
-]
-Chapter 8.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 353.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 353.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 353.
-
-[10
-
-]
-Chapter 9.
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 405.
-[11
-
-]
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 464.
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 464.
- [12] [13]
-
-LaTeX Warning: Citation 'cn1' on page 14 undefined on input line 611.
-
-
-LaTeX Warning: Citation 'en2' on page 14 undefined on input line 611.
-
-
-LaTeX Warning: Citation 'en3' on page 14 undefined on input line 611.
-
-[14]
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 696.
-LaTeX Font Info:    Trying to load font information for U+OrnementsADF on input
- line 696.
- (D:\MiKTeX\tex/latex/adforn\uornementsadf.fd
-File: uornements.fd v1.2 2024/09/29 font definitions for U/OrnementsADF.
-) [15]
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 781.
- [16]
-File: ./image/founder.png Graphic file (type bmp)
-<./image/founder.png>
- [17]
-
-LaTeX Font Warning: Font shape `TU/KaiTi(0)/b/n' undefined
-(Font)              using `TU/KaiTi(0)/m/n' instead on input line 853.
-
-[18]
-File: ./image/scatter.jpg Graphic file (type bmp)
-<./image/scatter.jpg>
- [19] [20]
-
-LaTeX Warning: Empty bibliography on input line 1020.
-
-[21]
-附录 A.
-[22
-
-] (Statistic Beans：統計学豆知識.aux)
- ***********
-LaTeX2e <2026-06-01>
-L3 programming layer <2022/08/05>
- ***********
-
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `"Statistic Beans：統計学豆知識".out' has not change
-d.
-(rerunfilecheck)             Checksum: <no file>.
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                "Statistic Beans：統計学豆知識"
-(biblatex)                and rerun LaTeX afterwards.
-
-Package logreq Info: Writing requests to '"Statistic Beans：統計学豆知識".run.xml'.
-\openout1 = `"Statistic Beans：統計学豆知識.run.xml"'.
-
- ) 
-Here is how much of TeX's memory you used:
- 48286 strings out of 402628
- 1017830 string characters out of 5446358
- 2095623 words of memory out of 5000000
- 76633 multiletter control sequences out of 15000+600000
- 638255 words of font info for 139 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 103i,16n,127p,755b,2542s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-Output written on Statistic Beans：統計学豆知識.pdf (26 pages).

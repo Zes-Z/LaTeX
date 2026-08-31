@@ -1,5 +1,18 @@
 \documentclass[lang=cn,10pt]{elegantbook}
 \usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{statistics}
+\usepackage{float}
+
+% 让每个 \chapter 都从奇数页（右侧页）开始
+\makeatletter
+\@twosidetrue
+\@mparswitchtrue
+\typeout{DEBUG twoside = \if@twoside YES\else NO\fi}
+\makeatother
 
 
 
@@ -9,7 +22,7 @@
 \author{郑在时}
 % \institute{Elegant\LaTeX{} Program}
 \date{ 2026/3/4}
-\version{0.3   {Typeset with \LaTeX{}}}
+\version{0.3ed   {Typeset with \LaTeX{}}}
 % \bioinfo{自定义题头}{信息}
 
 \extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。—— 比企谷八幡}
@@ -38,7 +51,7 @@
 \thispagestyle{empty}
 \vspace*{\fill}
 \begin{center}
-    \large \textbf{\textit{For my friends.}}
+    \large \textbf{\textit{To my friends.}}
 \end{center}
 \vfill  
 
@@ -55,7 +68,7 @@
 作者的联系方式：
 \begin{itemize}
   \item 邮箱：\email{zzs234@yeah.net}
-  \item Blog：\href{https://zesforu.pages.dev}{https://zesforu.pages.dev}
+  \item Blog：\href{https://zes4u.pages.dev}{https://zesforu.pages.dev}
   \item GitHub：\href{https://github.com/Zes-Z}{https://github.com/Zes-Z}
 \end{itemize}
 
@@ -67,10 +80,10 @@
   \item 第4章，主要回答：如何将统计得到的\textbf{一堆数字}优雅地\textbf{呈现}出来？并最大效率地\textbf{描述}这堆数字表达的\textbf{信息}？
   \item 第5章，更进一步，我们需要一些\textbf{概率}和\textbf{分布}；
   \item 第6章，假设检验：\textbf{从数字}形式的统计量\textbf{到文字}描述!\\
-  我们先假设今天万科喜家德没有喜三鲜，结果刚到喜家德坐下，发现隔壁桌吃的都是喜三鲜!\\
+  如果我们假设今天喜家德没有喜三鲜，结果刚坐下点单时，发现隔壁桌吃的都是喜三鲜!\\
   啊哈，看来我们的假设只有非常小的概率成立(因为可能有人外带了喜三鲜！)\\
   所以，我们有很大把握今天喜家德有喜三鲜;\\
-  顺带一提，其实我觉得西芹鲜肉也不错!
+  顺带一提，其实西芹鲜肉也不错!
   \item 第7章，方差分析，分析的是三个以上的\textbf{组均值是否存在显著差异}，差异的\textbf{原因}是什么；
   \item 第8章，\textbf{给出}多组一个或多个变量的\textbf{对应数值}，能否预测我们\textbf{想知道的数据}？\\
   例如：给你最近十天的\textbf{日照时间--平均气温}的对应数据，你能根据今天的日照时间预测今天的平均气温吗?\\
@@ -92,16 +105,16 @@
 朋友闲聊时，涉及到“统计学”时，不禁感叹道：“本来**就没啥说服力,全靠吹气球”，如果不引
 用一点方法，那便真正陷入了循环论证。于是我再次翻开了参考书籍，萌发了将部分所学记录下来的念头。
 
-此书写给自己和我的朋友们，如果有些许助益的话，也算是满足了我小小的虚荣心。
+此书写给自己和我的朋友们，如果有些许助益的话，也算是满足了我小小的幸福感。
 
 
 \section{阅读建议}
 以下是一些阅读本书的建议：
 \begin{itemize}
-  \item 当出现数学公式时，只需要知道这串符号在\textbf{算些什么}，也可主动了解，这不是坏事。
+  \item 出现数学公式时，不会作过多的术语解说，只需要知道这串符号在\textbf{算些什么}，读者也可查阅相关资料。
   \item 本书会在术语首次出现时解释说明，后不再赘述，建议添加标签、笔记。
   \item 符号标记为分析案例，建议动手尝试，不要只看不做，那没有用。
-  \item 由于作者水平、认知有限，符号标记的内容仅为作者的见解，建议读者自查相关资料。
+  \item 由于作者水平、认知有限，特殊标记的内容仅为作者的见解，建议读者自查相关资料。
   \item 感到迷惑时立即停下，你需要补充相关知识，或者回头看看。基础不牢，地动山摇。
   \item 不想读时立即停下，你需要休息。
 \end{itemize}
@@ -138,24 +151,25 @@
 
 常见的统计量用于基础描述统计，主要有:
 \begin{itemize}
-  \item 样本均值$\bar{x}$
-  \item 中位数
-  \item 众数
-  \item 极差
-  \item 方差
-  \item 标准差
-  \item 分位数
-  \item 相关系数
+  \item \textbf{样本均值}$\bar{x}$：把所有数据加起来再除以个数，反映数据的“平均水平”或中心位置。例如，5名同学的日语成绩分别是 60、70、80、90、100 分，则 $\bar{x}=(60+70+80+90+100)/5=80$ 分。
+  \item \textbf{中位数}：把数据从小到大排列后位于正中间的数。它比均值更“扛得住”极端值。例如上面的成绩排序后中间是 80，中位数就是 80 分。
+  \item \textbf{众数}：一组数据中出现次数（频数）最多的取值，代表“最常见的取值”。例如成绩 60、70、70、80、90 中，70 出现了两次、次数最多，所以众数是 70。一组数据可能没有众数，也可能有多个众数（如出现次数并列最多时）。
+  \item \textbf{极差}：最大值减去最小值，是最简单的波动范围度量。例如最高分 100、最低分 60，极差就是 $100-60=40$ 分。它计算简单，但很容易被极端值带偏。
+  \item \textbf{方差}：各数据与均值之差的平方的平均值，衡量数据整体偏离均值的程度。方差越大，说明数据越“散”。
+  \item \textbf{标准差}：方差的算术平方根，和原始数据单位一致，所以比方差更直观。它衡量数据围绕均值的离散程度：标准差越大，数据越分散；标准差越小，数据越集中。例如成绩的标准差是 10 分，可以理解为“成绩围绕平均分波动的典型幅度约为 10 分”（对近似正态分布的数据，约 68\% 落在均值$\pm 1$个标准差之内）。
+  \item \textbf{分位数}：把排序后的数据按位置切成若干等份。中位数就是第 50\% 分位数（0.5 分位数）；第 25\%、第 75\% 分位数分别称为下四分位数和上四分位数，用来描述数据分布在哪些位置。
+  \item \textbf{相关系数}：衡量两个变量之间线性相关的方向和强弱，取值范围在 $[-1,1]$。越接近 1 表示正相关越强，越接近 $-1$ 表示负相关越强，接近 0 表示几乎没有线性关系。
 \end{itemize}
+
 
 进阶的统计量用于从样本推断总体，主要有:
 \begin{itemize}
-  \item 标准化统计量
-  \item 偏度
-  \item 峰度
-  \item $t$统计量
-  \item $F$统计量
-  \item $\chi^2$统计量
+  \item \textbf{标准化统计量}：把数据减去均值再除以标准差，得到标准分（$z$ 分数）。它把不同尺度的数据放到同一把“尺子”上，方便比较。例如小明日语考 85 分、全班均值 80、标准差 5，则 $z=(85-80)/5=1$，说明他比平均高 1 个标准差。
+  \item \textbf{偏度}：衡量分布左右不对称的程度和方向。偏度大于 0 说明右尾更长（右偏），小于 0 说明左尾更长（左偏），等于 0 说明大致对称。
+  \item \textbf{峰度}：衡量分布是“尖”还是“平”，反映数据在均值附近集中的程度以及尾部的厚薄。峰度越大，分布通常越“尖”、尾部越厚。
+  \item \textbf{$t$统计量}：在总体方差未知、样本量较小时，用于检验均值是否等于某个值或两组均值是否有差异。它由“样本均值与假设值的差”除以“标准误差”得到，是 $t$ 检验的核心。
+  \item \textbf{$F$统计量}：用于比较两个方差是否相等，或检验多个组的均值是否存在显著差异（方差分析）。它通常是两个方差之比，是 $F$ 检验和方差分析的核心。
+  \item \textbf{$\chi^2$统计量}：用于检验分类数据的“实际频数”与“理论频数”是否吻合，例如检验某枚骰子是否公平、两个分类变量是否独立。它把每个类别的“实际值减期望值”的平方除以期望值后加总得到。
 \end{itemize}
 
 
@@ -167,7 +181,19 @@
 
 其中，数据回答：“我们观察到了什么？”
 统计量回答：“这些数据有什么特征？”
-统计推断回答：“这些特征是否具有说服力，能否推广到更大的世界？”
+统计推断回答：“这些特征是否具有说服力，能否推广到更大的范围？”
+
+用一个例子把三者串起来：假设你想了解全校学生的平均身高。
+\begin{itemize}
+  \item \textbf{数据}：随机抽取 100 名学生，记录下每个人的身高，这 100 个数字就是数据。
+  \item \textbf{统计量}：计算这 100 个身高的平均值 $\bar{x}=168$ cm，这就是从数据中提取出的统计量。
+  \item \textbf{统计推断}：用样本均值 $168$ cm 去估计全校学生的平均身高，并判断这个估计有多可靠、误差有多大。
+\end{itemize}
+
+\begin{remark}
+  统计量是从样本中算出来的“已知数”，而总体的参数（如全校真实平均身高）是“未知数”。
+  统计推断要做的事，就是借助统计量这个“已知数”，去合理地猜测那个“未知数”。
+\end{remark}
 
 
 
@@ -182,6 +208,25 @@
 
 
 \section{统计设计}
+拿到一个研究问题后，先别急着冲出去收集数据。\textbf{统计设计}就是在动手之前，把“要什么数据、从哪里来、怎么来、来了以后怎么办”统统想清楚。设计做得好，后面的路才走得顺；设计做得糙，很可能收集完数据才发现方法不对、样本没代表性，白忙一场。
+
+统计设计至少要想清楚以下几件事：
+\begin{itemize}
+  \item \textbf{研究问题与假设}：到底想回答什么？有没有一个可以检验的猜想？
+  \item \textbf{总体与抽样对象}：我们的研究对象是谁？哪些人/物才算数？
+  \item \textbf{抽样方法}：用概率抽样还是非概率抽样？怎么抽才能代表总体？
+  \item \textbf{样本量}：大概需要多少条数据才够？太少了没说服力，太多了浪费。
+  \item \textbf{变量与记录方式}：要记录哪些变量？怎么编码？用表格还是问卷？
+  \item \textbf{统计检验的选择}：根据研究问题的类型判断该用哪种检验，并预判数据到手后会用哪些统计量。比如比较两组均值用$t$检验，比较多组均值用方差分析（$F$检验），考察分类变量是否独立用$\chi^2$检验，考察两个变量的关系用相关或回归。
+\end{itemize}
+
+例如：假设你是一位日语教师，想了解学校里日语学生的日语考试成绩。统计设计阶段就应该想清楚：总体是“全校日语学生”，抽样采用分层抽样（按年级、班级各抽一部分），记录学号、年级、成绩等变量；由于研究问题是“平均分是否达标”，属于比较均值，所以计划用均值、标准差来描述，再用$t$检验来判断。这样到了采集数据时，每一步都有章可循。
+
+\begin{remark}
+统计设计不是一次性的“填空题”。随着对问题的理解加深，设计常常需要回头调整——比如发现某个变量不好收集，或样本量预算不够，那就及时修改方案，总比硬着头皮收一堆用不上的数据强。
+\end{remark}
+
+
 
 
 
@@ -190,7 +235,7 @@
 
 为了尽可能地保证统计的无偏差性和准确性，在采集样本数据时需要进行系统的、公平的、随机的抽样。既不能随心所欲地收集数据，也不能贪图方便省事。
 
-例如：假设你是一位日语教师，现想了解学校里日语学生的日语考试成绩。乍一看样本数据采集十分简单，只需收集一定量的日语成绩即可；但实际上
+例如：在上一个例子中，乍一看样本数据采集十分简单，只需收集一定量的日语成绩即可；但实际上
 这里藏了不少坑！首先你不能仅收集自己班级学生的信息作为样本数据集，数据的来源要尽可能的全面，多样，无偏好，最终保证你收集到的那一小部分数据能够很好地代表总体。
 所以你应该尽可能多的，随机收集学校里日语学生的日语考试成绩，再进行下一步的统计。
 
@@ -220,14 +265,78 @@
 
 
 \section{数据的整理与描述}
+初步采集的原始数据，往往是一堆乱糟糟的数字和记录，直接进行分析是不行的。\textbf{数据的整理与描述}，就是先把数据“收拾干净”，再用表格、图表和统计量把数据里的信息表现出来。
+
+整理阶段通常要做这几件事：
+\begin{itemize}
+  \item \textbf{检查与清洗}：看看有没有缺失值、重复记录、明显录错的数（比如成绩写成 150 分、身高写成 1.8 米却录成 18 米）。
+  \item \textbf{编码与分类}：把文字信息转成可计算的类别或数字，例如把“男/女”编码成 0/1。
+  \item \textbf{排序与分组}：把数据按大小排列；需要画直方图时，按第 3.3 节的斯特吉斯规则确定组数再分组。
+  \item \textbf{制作频数表}：统计每个取值或每个组里有多少条数据，一眼看出分布的大致形状。
+  \item \textbf{可视化}：用直方图、箱型图、条形图等把分布展示出来（详见第 4 章）。
+  \item \textbf{计算描述统计量}：均值、中位数、众数、方差、标准差、分位数等，用数字概括数据特征。
+\end{itemize}
+
+例如：你收集到 50 名日语学生的成绩，先检查有没有缺考或录错的分数；再按 60 以下、60--70、70--80、80--90、90 以上分组做频数表；接着画一张直方图看看成绩大致集中在哪一段；最后算出平均分、标准差，心里就有数了。
+
+\begin{remark}
+整理和描述不是“为了好看而折腾”。同一个数据集，分组方式、图表类型选得不一样，给人留下的印象可能完全不同。整理阶段多花点心思，能避免后面被数据“误导”。
+\end{remark}
 
 
 
 \section{计算与分析数据}
+数据整理好以后，就到了真正“算”和“想”的环节。\textbf{计算与分析数据}，不只是把统计量按公式计算出来，更重要的是\textbf{结合研究问题去解读这些数字}：它们说明了什么？能不能支撑我们的猜想？
+
+这一步通常按这样的思路走：
+\begin{itemize}
+  \item \textbf{选对统计量}：根据数据类型和研究问题，选择合适的手段。比如比较平均水平用均值或中位数，看离散程度用标准差，看两个变量的关系用相关系数。
+  \item \textbf{计算描述统计量}：先用均值、中位数、标准差、分位数等把数据的“长相”描述出来。
+  \item \textbf{进行统计推断}：如果需要由样本推测总体，就做点估计、区间估计或假设检验（如$t$检验、$F$检验、$\chi^2$检验）。
+  \item \textbf{回到问题本身}：把计算结果放回最初的研究问题里，用自然语言下结论，而不是扔一堆数字让读者自己猜。
+\end{itemize}
+
+例如：你算出 50 名日语学生的平均分是 82 分、标准差是 8 分。光说“平均 82 分”还不够，你还想知道这个样本能否代表全校——于是做一次$t$检验，判断全校日语学生的平均分是否显著高于 80 分，再根据$p$值给出结论。
+
+\begin{remark}
+计算只是手段，不是终点。拿到一个“显著”的结果，也别急着欢呼：还要想想样本有没有代表性、效应在实际中够不够大、有没有其他解释。\textbf{统计显著不等于实际重要，更不等于因果关系。}
+\end{remark}
 
 
 
 \section{完整的统计步骤}
+把前面几节串起来，一次完整的统计大致会经历下面几步。值得注意的是，这条路并不是只能走一遍：当分析结果不理想、发现设计有漏洞时，常常需要回到前面的步骤重新调整。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+      node distance=1.1cm,
+      box/.style={draw=main, very thick, rounded corners=8pt, fill=main!8,
+                  minimum width=3.4cm, minimum height=0.9cm, align=center, font=\small},
+      arrow/.style={-{Stealth[length=3mm]}, thick, main}
+    ]
+    \node[box] (q) {提出问题};
+    \node[box, below=of q] (d) {统计设计};
+    \node[box, below=of d] (s) {样本数据采集};
+    \node[box, below=of s] (o) {数据的整理与描述};
+    \node[box, below=of o] (a) {计算与分析数据};
+    \node[box, below=of a] (c) {得出结论};
+
+    \draw[arrow] (q) -- (d);
+    \draw[arrow] (d) -- (s);
+    \draw[arrow] (s) -- (o);
+    \draw[arrow] (o) -- (a);
+    \draw[arrow] (a) -- (c);
+
+    \draw[arrow] (a.west) -- ++(-2.2,0) node[midway, left, font=\scriptsize, align=center]
+          {结果不理想时\\回头调整} |- (q.west);
+  \end{tikzpicture}
+  \caption{完整的统计步骤流程图}
+\end{figure}
+
+\begin{remark}
+流程图里最容易被忽略的是那条“回头”的箭头。现实中很少有统计能一次走通：数据收得不够、分析结果不显著、问题本身要修正，都是常有的事。\textbf{允许回头，才是完整的统计过程。}
+\end{remark}
 
 
 
@@ -239,36 +348,286 @@
 
 \chapter{数据的可视化与描述}
 
-\begin{introduction}
-  \item 积分定义~\ref{def:int}
-  \item Fubini 定理~\ref{thm:fubi}
-  \item 最优性原理~\ref{pro:max}
-  \item 柯西列性质~\ref{property:cauchy}
-  \item 韦达定理
-\end{introduction}
+% \begin{introduction}
+%   \item 积分定义~\ref{def:int}
+%   \item Fubini 定理~\ref{thm:fubi}
+%   \item 最优性原理~\ref{pro:max}
+%   \item 柯西列性质~\ref{property:cauchy}
+%   \item 韦达定理
+% \end{introduction}
 
 \section{使用图展示数据}
-在前面的章节做了必要的准备后，本章开始介绍。
+在前面的章节做了必要的准备后，本章开始介绍。数据整理好以后，一张合适的图往往比一大段文字更能让人一眼看出规律。本章先用\textbf{二维图}入门，再逐步介绍三维图和降维显示。
 
 \subsection{二维图}
+二维图是在一张平面图上，用横轴和纵轴承载信息，最常见的有直方图、折线图、箱型图和散点图。
+
 \subsubsection{直方图}
+直方图用来展示\textbf{一组数值数据的分布}：把数据按区间分组，每个区间画一根柱子，柱子的高度表示落在该区间的数据个数（频数）。
+
+例如，某次日语测验 40 名学生的成绩如下（单位：分）：
+\begin{center}
+56, 58, 61, 63, 65, 67, 68, 70, 71, 72,\\
+73, 74, 75, 75, 76, 77, 78, 78, 79, 80,\\
+80, 81, 82, 83, 84, 85, 85, 86, 87, 88,\\
+89, 90, 91, 92, 93, 95, 96, 97, 98, 100
+\end{center}
+
+按每 10 分一组，可以得到下面的频数表：
+\begin{table}[htbp]
+  \centering
+  \caption{40 名学生的日语成绩频数表}
+  \begin{tabular}{cc}
+    \toprule
+    成绩区间（分） & 人数 \\
+    \midrule
+    50--59 & 2 \\
+    60--69 & 5 \\
+    70--79 & 12 \\
+    80--89 & 12 \\
+    90--100 & 9 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        bar width=0.7,
+        xlabel={成绩区间（分）},
+        ylabel={人数},
+        ymin=0,
+        xtick={1,2,3,4,5},
+        xticklabels={50--59,60--69,70--79,80--89,90--100},
+        nodes near coords,
+        every node near coord/.append style={font=\scriptsize},
+        title={40 名学生日语成绩直方图}
+      ]
+      \addplot coordinates {(1,2) (2,5) (3,12) (4,12) (5,9)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{40 名学生日语成绩直方图}
+\end{figure}
+
+从直方图可以直观看到：成绩大多集中在 70--89 分，两头少、中间多，整体分布比较接近“中间高、两边低”的形状。
+
+\subsubsection{折线图}
+折线图适合展示\textbf{数据随时间或其他有序变量的变化趋势}。横轴通常是有先后顺序的类别（如星期、月份），纵轴是数值。
+
+例如，某位同学连续一周每天复习日语的时间（单位：分钟）如下：
+\begin{center}
+周一 30，周二 45，周三 40，周四 60，周五 50，周六 90，周日 80
+\end{center}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        symbolic x coords={周一,周二,周三,周四,周五,周六,周日},
+        xtick=data,
+        xlabel={星期},
+        ylabel={复习时间（分钟）},
+        ymin=0,
+        mark=*,
+        title={一周每天复习日语的时间}
+      ]
+      \addplot coordinates {(周一,30) (周二,45) (周三,40) (周四,60) (周五,50) (周六,90) (周日,80)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{一周每天复习日语时间折线图}
+\end{figure}
+
+从折线图可以清楚看到：周中起伏不大，但到了周末复习时间明显上升——这就是折线图“看趋势”的用处。
 
 \subsubsection{箱型图}
+箱型图用来\textbf{概括一组数据的分布位置和离散程度}，它能同时显示最小值、下四分位数、中位数、上四分位数和最大值，还能把异常值“暴露”出来。
 
+例如，比较三个班的日语成绩（每班 10 人）：
+\begin{center}
+1班：60, 65, 70, 72, 75, 78, 80, 82, 85, 90\\
+2班：55, 60, 62, 68, 70, 72, 75, 78, 80, 85\\
+3班：70, 75, 78, 82, 85, 88, 90, 92, 95, 98
+\end{center}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        ylabel={成绩（分）},
+        ymin=40, ymax=110,
+        xtick={1,2,3},
+        xticklabels={1班,2班,3班},
+        boxplot/draw direction=y,
+        title={三个班日语成绩箱型图}
+      ]
+      \addplot+[boxplot prepared={
+          median=76.5, upper quartile=82, lower quartile=70,
+          upper whisker=90, lower whisker=60
+        }, boxplot/draw position=1] coordinates {};
+      \addplot+[boxplot prepared={
+          median=71, upper quartile=78, lower quartile=62,
+          upper whisker=85, lower whisker=55
+        }, boxplot/draw position=2] coordinates {};
+      \addplot+[boxplot prepared={
+          median=86.5, upper quartile=92, lower quartile=78,
+          upper whisker=98, lower whisker=70
+        }, boxplot/draw position=3] coordinates {};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{三个班日语成绩箱型图}
+\end{figure}
+
+一眼看去，3 班的箱子整体位置最高，说明成绩整体最好；2 班的箱子最“胖”，说明成绩比较分散。
+
+\subsubsection{散点图}
+散点图用来\textbf{观察两个数值变量之间是否有关系}，每个点代表一条数据。
+
+例如，10 名同学每天学习日语的时间与日语成绩如下：
+\begin{center}
+学习时间（小时）：2, 3, 4, 5, 6, 7, 8, 9, 10, 11\\
+日语成绩（分）：58, 62, 68, 66, 75, 80, 83, 96, 92, 95
+\end{center}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        xlabel={每天学习时间（小时）},
+        ylabel={日语成绩（分）},
+        xmin=0, xmax=12,
+        ymin=50, ymax=100,
+        only marks,
+        title={学习时间与日语成绩的散点图}
+      ]
+      \addplot coordinates {(2,58) (3,62) (4,68) (5,66) (6,75) (7,80) (8,83) (9,96) (10,92) (11,95)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{学习时间与日语成绩散点图}
+\end{figure}
+
+这些点大致从左下往右上排列，说明学习时间越长、成绩越高，两者呈现正相关——更严格的度量方法（相关系数）会在后面章节介绍。
+
+\begin{remark}
+二维图虽然简单，但选错图很容易误导读者：想看分布用直方图，想看趋势用折线图，想比分布位置用箱型图，想看两个变量的关系用散点图。\textbf{先想清楚要回答什么问题，再选图进行展示。}
+\end{remark}
 
 \subsection{三维图}
+二维图只能同时看两个变量，当我们想观察\textbf{三个变量}的关系时，就可以把图“立起来”，变成三维图。三维图最常见的形式是三维曲面图和三维散点图，其中\textbf{三维曲面图}特别适合展示“一个数值随两个变量连续变化”的情况。
 
+例如，二元正态分布的密度曲面就像一个“山包”：中心最高，向四周平滑地下降。这张图用 $z=e^{-(x^2+y^2)/2}$ 示意，横轴和纵轴是两个变量，竖轴是密度值。
 
-\subsection{高维图的降维显示}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        view={60}{30},
+        xlabel={$x$},
+        ylabel={$y$},
+        zlabel={密度值},
+        zmin=0, zmax=1.1,
+        title={二元正态密度曲面}
+      ]
+      \addplot3[surf, domain=-3:3, domain y=-3:3, samples=30]
+        {exp(-(x^2+y^2)/2)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{二元正态密度曲面示意图}
+\end{figure}
+
+三维曲面图能让人一眼看到“整体形状”，比如哪里高、哪里低、怎么过渡。但它也有代价：在纸面上不容易精确读数，人眼也容易看花。所以实际分析中，三维图多用来“找感觉”，精确判断还是要靠统计量。
+
+\subsection{高维度的降维显示}
+变量一旦超过三个，二维、三维图都画不下了。这时常用的思路是\textbf{降维}：把高维数据投影到二维或三维空间，同时尽量保留数据原有的差异和结构。
+
+常见的降维方法有：
+\begin{itemize}
+  \item \textbf{主成分分析（PCA）}：找几个新的、互不相关的“综合变量”，用它们代表原来的众多变量。
+  \item \textbf{t-SNE}：擅长把高维数据“摊开”到二维，让相似的样本在图上靠得更近，常用于可视化聚类结果。
+  \item \textbf{UMAP}：类似 t-SNE，但速度更快、对全局结构保留得更好。
+\end{itemize}
+
+\begin{remark}
+降维后的图只是“投影”，不是原始数据的完整还原。它适合用来发现大致的模式（比如哪些样本聚在一起），但下结论之前，还是要回到原始变量上验证。\textbf{降维是辅助眼睛，不是替代统计。}
+\end{remark}
 
 
 
 \section{使用统计量描述数据}
+图能让人“看见”数据，但写报告、做比较时，还是需要数字来精确地描述。这一节把第 2 章提到的统计量正式用起来，分成“常用统计量”和“各个分布的统计量”两部分。
+
 \subsection{常用统计量}
+常用统计量大致可以分成三类：描述\textbf{集中趋势}、描述\textbf{离散程度}、描述\textbf{分布位置与形状}。
 
+\textbf{1. 集中趋势：数据“集中在哪”}
+\begin{itemize}
+  \item \textbf{样本均值} $\bar{x}=\dfrac{1}{n}\sum\limits_{i=1}^{n}x_i$：所有数据的算术平均，最常用，但容易被极端值拉偏。
+  \item \textbf{中位数}：排序后正中间的数，极端值再多也“不为所动”。
+  \item \textbf{众数}：出现次数最多的取值，适合描述分类数据或“最常见的水平”。
+\end{itemize}
 
+\textbf{2. 离散程度：数据“散不散”}
+\begin{itemize}
+  \item \textbf{极差} $R=x_{(n)}-x_{(1)}$：最大值减最小值，简单，但只看了两个极端值。
+  \item \textbf{样本方差} $s^2=\dfrac{1}{n-1}\sum\limits_{i=1}^{n}(x_i-\bar{x})^2$：数据偏离均值的平均平方程度。
+  \item \textbf{样本标准差} $s=\sqrt{s^2}$：和原始数据同单位，比方差更直观。
+  \item \textbf{变异系数} $CV=\dfrac{s}{\bar{x}}$：去掉单位的影响，用来比较尺度不同的数据谁更“散”。
+\end{itemize}
+
+\textbf{3. 分布位置与形状}
+\begin{itemize}
+  \item \textbf{分位数}：如第 25\%、50\%、75\% 分位数（下四分位数、中位数、上四分位数），描述数据分布在哪些位置。
+  \item \textbf{偏度}：分布是否左右对称、偏向哪边。
+  \item \textbf{峰度}：分布是“尖”还是“平”、尾部厚不厚。
+\end{itemize}
+
+用回 4.1.1 那 40 名学生的日语成绩，可以算出下面这些常用统计量：
+\begin{table}[H]
+  \centering
+  \caption{40 名学生成绩的常用统计量}
+  \begin{tabular}{lc|lc}
+    \toprule
+    统计量 & 数值 & 统计量 & 数值 \\
+    \midrule
+    均值 $\bar{x}$ & 79.95 & 极差 $R$ & 44 \\
+    中位数 & 80 & 样本方差 $s^2$ & 128.20 \\
+    下四分位数 & 72.5 & 样本标准差 $s$ & 11.32 \\
+    上四分位数 & 88.5 & 变异系数 $CV$ & 0.14 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{remark}
+这份数据里，均值 79.95 和中位数 80 非常接近，说明成绩分布比较对称，没有明显的极端值捣乱；标准差约 11.32 分，大致可以理解为“大部分学生的成绩在平均分上下 10 分出头浮动”。\textbf{只看均值不看离散程度，很容易被“平均”骗了。}
+\end{remark}
 
 \subsection{各个分布的统计量}
+不同的概率分布都有自己固定的期望（均值）和方差。记住这些结论，后面做参数估计和假设检验时能省很多事。
+
+\begin{table}[H]
+  \centering
+  \caption{常见分布的期望与方差}
+  \begin{tabular}{lccc}
+    \toprule
+    分布 & 记号 & 期望 $E(X)$ & 方差 $Var(X)$ \\
+    \midrule
+    0-1 分布 & $B(1,p)$ & $p$ & $p(1-p)$ \\
+    二项分布 & $B(n,p)$ & $np$ & $np(1-p)$ \\
+    泊松分布 & $P(\lambda)$ & $\lambda$ & $\lambda$ \\
+    均匀分布 & $U(a,b)$ & $\frac{a+b}{2}$ & $\frac{(b-a)^2}{12}$ \\
+    正态分布 & $N(\mu,\sigma^2)$ & $\mu$ & $\sigma^2$ \\
+    指数分布 & $Exp(\lambda)$ & $\frac{1}{\lambda}$ & $\frac{1}{\lambda^2}$ \\
+    $t$ 分布 & $t(k)$ & $0\ (k>1)$ & $\frac{k}{k-2}\ (k>2)$ \\
+    $\chi^2$ 分布 & $\chi^2(k)$ & $k$ & $2k$ \\
+    $F$ 分布 & $F(k_1,k_2)$ & $\frac{k_2}{k_2-2}\ (k_2>2)$ & $\frac{2k_2^2(k_1+k_2-2)}{k_1(k_2-2)^2(k_2-4)}\ (k_2>4)$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{remark}
+几个容易记的小规律：泊松分布“期望等于方差”；正态分布完全由 $\mu$ 和 $\sigma^2$ 两个参数决定；$t$、$\chi^2$、$F$ 这几个用于检验的分布，其期望和方差往往只在自由度足够大时才存在或才简洁。
+\end{remark}
 
 
 
@@ -277,25 +636,312 @@
 
 \chapter{概率与分布}
 \section{概率为0就是不可能事件吗?}
+直觉上，概率是 0 的事情好像就“绝不会发生”。但在统计学里，这个直觉要小心：\textbf{概率为 0 并不等于不可能发生}，\textbf{概率为 1 也不等于必然发生}。
 
+关键在于区分\textbf{离散型}和\textbf{连续型}随机变量：
+\begin{itemize}
+  \item \textbf{离散型}：取值是一个个孤立的点，概率 0 通常就意味着“这件事不发生”。
+  \item \textbf{连续型}：取值是某个区间里的任意实数，任何一个“单点”的概率都是 0。例如 $X\sim U(0,1)$，$P(X=0.5)=0$，但 0.5 并不是不可能出现——只是它太“细”了，单独一个点没有“长度”，所以概率算出来是 0。
+\end{itemize}
 
+\begin{remark}
+可以这样理解：在数轴上随机撒一个点，它正好落在 0.5 这个“没有宽度”的位置上，概率当然是 0；但这并不意味着 0.5 不存在。所以连续分布里，“概率为 0 的事件”和“不可能事件”是两回事。
+\end{remark}
+
+\section{什么是分布?}
+“分布”这个词，本质上是在回答一个问题：\textbf{一个随机变量取各种可能值的概率，是怎么“摊开”的}。
+
+例如掷一颗公平的骰子：
+\begin{itemize}
+  \item 可能取值是 1、2、3、4、5、6；
+  \item 每个点数出现的概率都是 $\frac{1}{6}$。
+\end{itemize}
+把“每个取值对应多少概率”完整画出来，就是下面这张柱状图：
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        bar width=0.5,
+        ymin=0, ymax=0.35,
+        xtick={1,2,3,4,5,6},
+        ylabel={概率},
+        xlabel={点数},
+        nodes near coords,
+        every node near coord/.append style={font=\scriptsize},
+        title={公平骰子的概率分布}
+      ]
+      \addplot[point meta=explicit symbolic] coordinates {
+        (1,1/6) [$\frac{1}{6}$]
+        (2,1/6) [$\frac{1}{6}$]
+        (3,1/6) [$\frac{1}{6}$]
+        (4,1/6) [$\frac{1}{6}$]
+        (5,1/6) [$\frac{1}{6}$]
+        (6,1/6) [$\frac{1}{6}$]
+      };
+    \end{axis}
+  \end{tikzpicture}
+  \caption{公平骰子的概率分布（离散均匀分布）}
+\end{figure}
+
+这种取值是孤立点、每个点都有明确概率的，叫\textbf{离散型分布}。注意，所有柱子的高度加起来正好等于 1。
+
+但现实中的骰子不一定是公平的。假如这颗骰子被动了手脚，1 点和 2 点更容易出现：
+\begin{itemize}
+  \item $P(1)=\frac{1}{4},\ P(2)=\frac{1}{4},\ P(3)=\frac{3}{20},\ P(4)=\frac{3}{20},\ P(5)=\frac{1}{10},\ P(6)=\frac{1}{10}$
+\end{itemize}
+画出来就是这样一张“高低不平”的图：
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        bar width=0.5,
+        ymin=0, ymax=0.3,
+        xtick={1,2,3,4,5,6},
+        ylabel={概率},
+        xlabel={点数},
+        nodes near coords,
+        every node near coord/.append style={font=\scriptsize},
+        title={被动手脚后的骰子概率分布}
+      ]
+      \addplot[point meta=explicit symbolic] coordinates {
+        (1,1/4) [$\frac{1}{4}$]
+        (2,1/4) [$\frac{1}{4}$]
+        (3,3/20) [$\frac{3}{20}$]
+        (4,3/20) [$\frac{3}{20}$]
+        (5,1/10) [$\frac{1}{10}$]
+        (6,1/10) [$\frac{1}{10}$]
+      };
+    \end{axis}
+  \end{tikzpicture}
+  \caption{被动手脚后的骰子概率分布（不均匀分布）}
+\end{figure}
+
+同样是 1--6 的取值，概率怎么分配不一样，分布就不一样——这就是“分布”的意义。
+
+所以一句话总结：\textbf{分布 = 把所有可能取值，以及它们“被抽中的可能性”，完整地描述出来}。
+
+\begin{remark}
+分布就像是数据的“户口本”：它告诉我们数据可能长什么样、哪些值常见、哪些值罕见。后面要讲的标准正态分布、二项分布、泊松分布等，都是具有某种特定“长相”的分布。
+\end{remark}
 
 \section{标准正态分布}
+在讲标准正态分布之前，我们先要知道\textbf{连续型分布}是怎么回事。
+与\textbf{取值}是孤立点、每个点都有明确概率的\textbf{离散型分布}不同，
+我们有时会遇见\textbf{连续}的数据，这里的连续不是排队那种位置上的前后连续，
+而是分布中，\textbf{数值取值}的连续，
+比如我们现在有一个无数个面的概念骰子，
+它能摇出1点，还能摇出1.999点,甚至是1.0000...1至6点之间所有的数。
+像这样取值是连续的，可以无限接近的数据的分布，就是连续型分布。
+正态分布是统计里最重要的连续型分布之一，而\textbf{标准正态分布}是其中最“标准”的一款：均值 $\mu=0$、方差 $\sigma^2=1$，记作 $N(0,1)$。它的概率密度函数为
+\begin{center}
+  $f(x)=\dfrac{1}{\sqrt{2\pi}}e^{-x^2/2}$
+\end{center}
+
+标准正态分布曲线长得像一个左右对称的“钟”：曲线下方的面积之和，即总概率"1"
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        width=10cm, height=6cm,
+        xlabel={$x$},
+        ylabel={密度值},
+        ymin=0, ymax=0.45,
+        xmin=-4.2, xmax=4.2,
+        title={标准正态分布 $N(0,1)$ 密度曲线}
+      ]
+      \addplot[domain=-4:4, samples=200, thick, main]
+        {1/sqrt(2*pi)*exp(-x^2/2)};
+      \addplot[mark=none, dashed] coordinates {(-1,0) (-1,0.35)};
+      \addplot[mark=none, dashed] coordinates {(1,0) (1,0.35)};
+      \addplot[mark=none, dashed] coordinates {(-2,0) (-2,0.2)};
+      \addplot[mark=none, dashed] coordinates {(2,0) (2,0.2)};
+      \node at (axis cs:0,-0.06) {$0$};
+      \node at (axis cs:-1,-0.06) {$-1$};
+      \node at (axis cs:1,-0.06) {$1$};
+      \node at (axis cs:-2,-0.06) {$-2$};
+      \node at (axis cs:2,-0.06) {$2$};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{标准正态分布密度曲线}
+\end{figure}
+
+例如，假设某校学生的身高近似服从正态分布，均值 173 cm、标准差 5 cm。它的密度曲线仍然是一个“钟”，但对称轴从 0 挪到了 173 cm：
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        width=10cm, height=6cm,
+        xlabel={身高（cm）},
+        ylabel={密度值},
+        ymin=0, ymax=0.09,
+        xmin=155, xmax=191,
+        title={身高 $N(173,5^2)$ 的正态分布曲线}
+      ]
+      \addplot[domain=155:191, samples=200, thick, main]
+        {1/(5*sqrt(2*pi))*exp(-(x-173)^2/(2*25))};
+      \addplot[mark=none, dashed] coordinates {(173,0) (173,0.08)};
+      \node at (axis cs:173,-0.004) {$173$};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{以身高为例的正态分布曲线（对称轴 173 cm）}
+\end{figure}
+
+分布曲线关于 173 cm 完全对称，越靠近 173 cm 密度越高，越往两边越低。
+这表示这个学校绝大多数学生的身高都"中规中矩"，在173cm，
+长得特别高的人数(或概率)比较小，同样的，长得特别矮的人数(或概率)也比较小。
+换句话说，一组符合正态分布的数据，绝大部分都中规中矩，越是极端的数据，出现概率越小。
+
+标准正态分布有几个常用性质：
+\begin{itemize}
+  \item 关于 $x=0$ 完全对称，均值、中位数、众数都等于 0。
+  \item 曲线下的总面积等于 1，也就是所有可能取值的概率总和为 1。
+  \item \textbf{68--95--99.7 法则}：约 68\% 的数据落在正负一个标准差内，约 95\% 落在正负两个标准差内，约 99.7\% 落在正负三个标准差内。
+\end{itemize}
+
+\begin{remark}
+任何正态分布 $N(\mu,\sigma^2)$ 都可以通过标准化
+\begin{center}
+  $Z=\dfrac{X-\mu}{\sigma}$
+\end{center}
+变成标准正态分布 $N(0,1)$。所以查概率表时，只需要一张标准正态分布表就够了。这也是标准正态分布如此“标准”的原因。
+\end{remark}
 
 
 
 \section{离散型随机变量及其分布}
-\subsection{0-1分布}
+离散型随机变量的取值是\textbf{一个接一个的孤立点}，每个取值都有明确的概率，所有取值的概率加起来等于 1。前面 5.2 里掷骰子就是典型的离散型分布。下面介绍三个最常用的离散分布：0-1分布、二项分布、泊松分布。
 
+\subsection{0-1分布}
+\textbf{0-1分布}是最简单的离散分布，随机变量只取两个值：0 和 1。通常把“成功”记为 1、“失败”记为 0，成功概率为 $p$：
+\begin{center}
+$P(X=1)=p,\qquad P(X=0)=1-p$
+\end{center}
+
+例如，抛一次硬币，正面朝上记为 1、反面记为 0，就服从 0-1 分布；一次考试及格记为 1、不及格记为 0，也服从 0-1 分布。
+
+0-1 分布的期望和方差都很简洁：
+\begin{itemize}
+  \item 期望：$E(X)=p$
+  \item 方差：$Var(X)=p(1-p)$
+\end{itemize}
 
 \subsection{二项分布}
+把 0-1 试验独立地重复 $n$ 次，记录“成功”的总次数 $X$，$X$ 就服从\textbf{二项分布}，记作 $X\sim B(n,p)$。它刻画的是：在 $n$ 次独立重复试验中恰好成功 $k$ 次的概率
+\begin{center}
+$P(X=k)=\binom{n}{k}p^k(1-p)^{n-k},\qquad k=0,1,\ldots,n$
+\end{center}
 
+例如，连续抛 10 次硬币，正面朝上的次数 $X\sim B(10,0.5)$。正面出现 0 次、5 次、10 次的概率各不相同，画出来就是下面这张柱状图：
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        bar width=0.6,
+        ymin=0, ymax=0.3,
+        xtick={0,1,2,3,4,5,6,7,8,9,10},
+        ylabel={概率},
+        xlabel={正面朝上次数 $k$},
+        title={二项分布 $B(10,0.5)$}
+      ]
+      \addplot coordinates {
+        (0,0.00098) (1,0.00977) (2,0.04395) (3,0.11719) (4,0.20508) (5,0.24609)
+        (6,0.20508) (7,0.11719) (8,0.04395) (9,0.00977) (10,0.00098)
+      };
+    \end{axis}
+  \end{tikzpicture}
+  \caption{二项分布 $B(10,0.5)$ 的概率分布}
+\end{figure}
+
+二项分布的期望和方差：
+\begin{itemize}
+  \item 期望：$E(X)=np$
+  \item 方差：$Var(X)=np(1-p)$
+\end{itemize}
+
+\begin{remark}
+0-1 分布其实就是 $n=1$ 时的二项分布。二项分布适合“次数有限、每次成功概率固定”的独立重复试验。
+\end{remark}
 
 \subsection{泊松分布}
+\textbf{泊松分布}用来描述单位时间、单位面积或单位长度内“稀有事件”发生次数的分布，记作 $X\sim P(\lambda)$，其中 $\lambda$ 是平均发生次数：
+\begin{center}
+$P(X=k)=\dfrac{\lambda^k e^{-\lambda}}{k!},\qquad k=0,1,2,\ldots$
+\end{center}
+
+例如，一小时内到达某商店的顾客数、一页书上印刷错误的数量、某路段一小时内发生的交通事故数，都常用泊松分布描述。以 $\lambda=3$ 为例，画出来就是下面这张柱状图：
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        bar width=0.6,
+        ymin=0, ymax=0.25,
+        xtick={0,1,2,3,4,5,6,7,8},
+        ylabel={概率},
+        xlabel={事件发生次数 $k$},
+        title={泊松分布 $P(3)$}
+      ]
+      \addplot coordinates {
+        (0,0.0498) (1,0.1494) (2,0.2240) (3,0.2240) (4,0.1680) (5,0.1008) (6,0.0504) (7,0.0216) (8,0.0081)
+      };
+    \end{axis}
+  \end{tikzpicture}
+  \caption{泊松分布 $P(3)$ 的概率分布}
+\end{figure}
+
+泊松分布最显眼的特征是：
+\begin{itemize}
+  \item 期望：$E(X)=\lambda$
+  \item 方差：$Var(X)=\lambda$
+\end{itemize}
+期望等于方差，是泊松分布的“招牌”。
+
+\begin{remark}
+当二项分布的 $n$ 很大、$p$ 很小时，二项分布可以近似看成泊松分布（此时 $\lambda=np$）。所以泊松分布也常用来近似“大量试验中成功次数很少”的情形。
+\end{remark}
 
 
 
 \section{自由度}
+\textbf{自由度}（degrees of freedom，简写 df）是一个听起来很高大上，其实很朴素的概念。不妨先来思考一个小问题：
+
+如果已知一个 6 人小组的平均成绩，那么至少需要知道几个人的成绩，才能准确说出每个人的成绩？
+
+答案是 5 个。因为在知道前 5 个人的成绩之前，最后一个人的成绩都是“未知”的；可一旦前 5 个人的成绩都知道了，最后一个人的成绩就被“锁死”了——它必须负责“兜底”，保证平均分对得上，这样才能“万事大吉”。
+
+也就是说，这 6 个人里，真正能自由变化的只有前 $n-1=5$ 个人，剩下的 1 个人是“工具人”，专门用来保证平均值成立。这里的 $n-1$（样本量减 1）就是\textbf{自由度}，记作 df。
+
+推广到一般情况：
+\begin{itemize}
+  \item \textbf{自由度 = 数据个数 − 不得不“牺牲”掉的约束个数}；
+  \item 每估计一个参数（比如均值），通常就要少掉一个自由度。
+\end{itemize}
+
+这也是为什么样本方差
+\begin{center}
+$s^2=\dfrac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2$
+\end{center}
+要用 $n-1$ 做分母，而不是 $n$：因为均值 $\bar{x}$ 已经被估计出来了，数据不再完全自由。
+
+常见分布里的自由度：
+\begin{itemize}
+  \item $\chi^2(k)$ 分布有 $k$ 个自由度；
+  \item $t(k)$ 分布的自由度为 $k$；
+  \item $F(k_1,k_2)$ 分布有两个自由度：分子自由度和分母自由度；
+  \item 卡方独立性检验中，$r\times c$ 列联表的自由度为 $(r-1)(c-1)$。
+\end{itemize}
+
+\begin{remark}
+自由度不是玄学，它决定了 $t$、$\chi^2$、$F$ 这些分布的“长相”。样本量越小、约束越多，自由度就越小，分布也就越“胖”、越不自信；样本量越大，自由度越大，这些分布会越来越接近正态分布。
+\end{remark}
 
 
 
@@ -304,22 +950,146 @@
 
 \chapter{假设检验：从统计量到结论}
 \section{假设检验与$p$值解读}
+先来想一个有点“抬杠”的问题：如何证明“并非世界上所有的人都是女人”？
+
+直接证明它很麻烦，但\textbf{证伪}就容易多了——只需找到一个反例：一个男人。于是我们先把“世界上所有的人都是女人”当作一个待检验的假设（原假设 $H_0$），然后努力找反例；只要找到一个男人，就有充分理由推翻 $H_0$，从而接受“并非所有人都是女人”这个结论。
+
+假设检验就是这个思路：\textbf{先假设一个“无事发生”的立场，再拿数据看能不能把它推翻}。
+
+一套完整的假设检验通常按下面几步走：
+\begin{enumerate}
+  \item \textbf{提出假设}：原假设 $H_0$（通常是“没有差异/没有关系/没有效果”），备择假设 $H_1$（通常是“有差异/有关系/有效果”）。
+  \item \textbf{选择合适的检验}：根据数据类型和问题选 $t$ 检验、$\chi^2$ 检验、$F$ 检验等。
+  \item \textbf{计算检验统计量和 $p$ 值}：$p$ 值表示“在 $H_0$ 为真的前提下，出现当前样本结果（或更极端结果）的概率”。
+  \item \textbf{比较显著性水平}：临界(概率)值通常取 $\alpha=0.05$。若 $p<\alpha$，说明在 $H_0$ 成立时还能看到这么极端的结果概率很小，于是有理由拒绝 $H_0$。
+  \item \textbf{下结论}：如果计算出来 $p$ 值小于临界值，则拒绝 $H_0$ ，支持 $H_1$；若 $p$ 值高于临界值，不能直接接受 $H_0$ 只能说“证据不足”，不能说明原假设 $H_0$ 一定正确。
+\end{enumerate}
+
+举个例子：某张期末成绩表里，乍一看男同学的体育成绩比女同学平均高5分，现在想探究男女体育成绩是否真的存在差异。我们需要给出假设：
+\begin{itemize}
+  \item $H_0$：体育成绩与性别无关（差异只是巧合）；
+  \item $H_1$：体育成绩与性别有关（存在真实差异）。
+\end{itemize}
+用统计软件或者手算在$H_0$前提下，得到现有成绩表的概率 $p$ 值：
+\begin{itemize}
+  \item 若 $p<0.05$：说明在“无关”的假设下，出现“男比女平均高 5 分”这种结果的可能性不到 5\%，我们更有理由相信这不是巧合，于是拒绝 $H_0$，认为体育成绩与性别存在差异。
+  \item 若 $p=0.33$：说明在“无关”的假设下，出现这种结果的概率高达 33\%，这说明一切很可能只是巧合，于是不能拒绝 $H_0$。
+\end{itemize}
+
+\begin{remark}
+$p$ 值小，说明“如果 $H_0$ 是真的，那这次样本结果太离谱了”，所以我们倾向于不相信 $H_0$。但要注意：\textbf{$p$ 值大不代表 $H_0$ 正确}，只代表“证据不足以拒绝它”。另外，$p<0.05$ 也不等于“实际效果很大”，更不等于因果关系。
+\end{remark}
 
 
 
 \section{置信区间}
+用样本估计总体参数，最朴素的办法是给一个“点”：比如抽 100 个学生，算出平均身高 168 cm，就猜全校平均身高是 168 cm。但这样做太“自信”了——换一批样本，结果可能就不是 168 了。
 
+更稳妥的做法是给一个\textbf{区间}：例如“有 95\% 的把握，全校平均身高在 166.2 cm 到 169.8 cm 之间”。这个区间就叫\textbf{置信区间}，95\% 叫\textbf{置信水平}。
 
+\begin{definition}[置信区间]
+设总体参数为 $\theta$，由样本构造区间 $(\hat{\theta}_L,\hat{\theta}_U)$。若该区间以 $1-\alpha$ 的概率包含 $\theta$，则称它为 $\theta$ 的置信水平为 $1-\alpha$ 的置信区间。
+\end{definition}
+
+常用的形式是“点估计 ± 误差范围”：
+\begin{center}
+$\bar{x}\pm z_{\alpha/2}\cdot\dfrac{\sigma}{\sqrt{n}}$（总体方差已知时）\qquad
+$\bar{x}\pm t_{\alpha/2}(n-1)\cdot\dfrac{s}{\sqrt{n}}$（总体方差未知时）
+\end{center}
+
+怎么理解“95\%”？
+\begin{itemize}
+  \item 不是“总体均值有 95\% 的概率落在这个区间里”（总体参数是固定值，不是随机变量）；
+  \item 而是：如果重复抽样很多次，每次都构造一个 95\% 置信区间，那么大约有 95\% 的区间会包含总体均值。
+\end{itemize}
+
+例如：抽 100 名学生，样本均值 168 cm，标准差 8 cm，则 95\% 置信区间约为
+\begin{center}
+$168\pm 1.96\times\dfrac{8}{\sqrt{100}}=168\pm1.568=(166.43,\ 169.57)$
+\end{center}
+可以写成：全校学生平均身高的 95\% 置信区间为 $(166.43,\ 169.57)$ cm。
+
+\begin{remark}
+置信区间比单个点估计更有信息量：区间越窄，说明估计越精确；区间越宽，说明不确定性越大。它和假设检验其实是一体两面——若某个假设值不在置信区间内，通常对应的检验也会拒绝 $H_0$。
+\end{remark}
 
 \section{$t$检验：关注“平均值”的差异}
+\textbf{$t$ 检验}用来回答“平均值有没有差异”的问题，常见有三种：
+\begin{itemize}
+  \item \textbf{单样本 $t$ 检验}：检验一个样本的均值是否等于某个已知值。例如：50 名日语学生的平均分是否显著高于 80 分。
+  \item \textbf{独立样本 $t$ 检验}：比较两个独立组的均值。例如：男、女生的体育成绩是否有差异。
+  \item \textbf{配对样本 $t$ 检验}：比较同一批对象前后两次测量。例如：同一批学生培训前后的日语成绩是否有提高。
+\end{itemize}
 
+单样本 $t$ 检验的统计量为
+\begin{center}
+$t=\dfrac{\bar{x}-\mu_0}{s/\sqrt{n}}$
+\end{center}
+其中 $\bar{x}$ 是样本均值，$\mu_0$ 是假设的总体均值，$s$ 是样本标准差，$n$ 是样本量，$t$ 服从自由度为 $n-1$ 的 $t$ 分布。
 
+例如：50 名学生日语成绩均值 82 分、标准差 8 分，想检验是否显著高于 80 分：
+\begin{itemize}
+  \item $H_0:\mu=80$，$H_1:\mu>80$；
+  \item $t=\dfrac{82-80}{8/\sqrt{50}}\approx1.77$；
+  \item 查 $t$ 分布表（df=49）得 $p$ 值，若 $p<0.05$ 则拒绝 $H_0$。
+\end{itemize}
+
+\begin{remark}
+$t$ 检验适合小样本，且要求数据近似正态、两组方差不要差太多。样本量很大时，$t$ 分布会越来越接近标准正态分布，检验结果也会越来越“稳”。
+\end{remark}
 
 \section{$\chi^2$(卡方)检验：关注“数量/频率”的分布}
+\textbf{$\chi^2$ 检验}（卡方检验）用于\textbf{分类数据}，关心的是“实际频数”和“理论频数”是否吻合。常见两种用途：
+\begin{itemize}
+  \item \textbf{拟合优度检验}：检验一组分类数据的分布是否符合某个理论分布。例如：一枚骰子是否公平。
+  \item \textbf{独立性检验}：检验两个\textbf{分类变量}是否相互独立。例如：性别与是否选修日语课是否有关。
+\end{itemize}
 
+$\chi^2$ 统计量的基本形式：
+\begin{center}
+$\chi^2=\sum\dfrac{(O-E)^2}{E}$
+\end{center}
+其中 $O$ 是实际观测频数，$E$ 是理论期望频数。$O$ 和 $E$ 差得越多，$\chi^2$ 越大，越说明“不符合/不独立”。
 
+例如检验一枚骰子是否公平：掷 60 次，理论上每个点数应出现 10 次；若 1 点出现 20 次、6 点出现 2 次，$O$ 和 $E$ 差很多，$\chi^2$ 就会很大，$p$ 值很小，从而怀疑骰子被动了手脚。
+
+独立性检验的自由度：
+\begin{center}
+$df=(r-1)(c-1)$
+\end{center}
+其中 $r$ 是行数，$c$ 是列数。
+
+\begin{remark}
+$\chi^2$ 检验用的是“频数/次数”，不是“均值”。所以它和 $t$ 检验的分工很清楚：\textbf{比较平均值用 $t$ 检验，比较数量/频率的分布用 $\chi^2$ 检验}。
+\end{remark}
 
 \section{非技术用语的假设检验总结模板}
+本节提供一个假设检验结果书写模板，便于简要地呈现假设检验过程与结论。使用时只需替换方括号中的内容。
+
+\begin{quote}
+本研究旨在探讨[研究目的]。据此提出如下假设：
+
+\textbf{零假设（$H_0$）}：[没有差异/没有关系/没有效果]。
+\textbf{备择假设（$H_1$）}：[存在差异/存在关系/存在效果]。
+
+为检验上述假设，采用[检验方法，如独立样本 $t$ 检验、$\chi^2$ 独立性检验、单因素方差分析等]。检验的显著性水平设为 $\alpha=0.05$。
+
+分析结果显示，检验统计量为[统计量值]，自由度为[自由度]，查表(或软件自动计算)知，对应的 $p$ 值为[$p$ 值]。
+
+由于 $p$ 值[ ＜ / ＞ ]显著性水平 $\alpha=0.05$，[拒绝/不能拒绝]零假设 $H_0$。据此可以认为，[根据 $H_1$ 表述研究结论，如：样本数据提供了统计学上显著的证据，表明……；或：样本数据未提供足够的证据表明……]。
+
+综上所述，[用一句话概括研究结论，但不作因果推断]。
+\end{quote}
+
+\begin{remark}
+正式书写时有几点需要注意：
+\begin{itemize}
+  \item $p$ 值应给出具体数值或明确的比较关系（如 $p<0.05$、$p=0.032$），不宜只写“显著/不显著”；
+  \item “拒绝 $H_0$”只能说“差异（或关系）具有统计学意义”，不能直接说“具有实际意义”或“存在因果关系”；
+  \item 若不能拒绝 $H_0$，应表述为“没有充分的证据拒绝 $H_0$”，而不是“$H_0$ 成立”；
+  \item 报告时应同时给出检验方法、统计量、自由度和 $p$ 值，保证结果可复核。
+\end{itemize}
+\end{remark}
 
 
 
@@ -328,18 +1098,94 @@
 
 \chapter{方差分析}
 \section{前置知识--方差分析在“分析”什么}
+$t$ 检验适合比较\textbf{两个}组的均值。那如果现在有四个班、两种教学方法、三种教材，要比较学生成绩的平均值呢？
 
+一个天真的想法是两两做 $t$ 检验：4 个班之间要比较 6 次，3 种教材之间要比较 3 次。但比较次数一多，犯“假阳性”错误（本来没差异却说有差异）的概率就会悄悄变大，这叫做\textbf{多重比较问题}。
 
+\textbf{方差分析}（ANOVA）就是为了解决这个问题而生的：它\textbf{一次性比较多个组的均值是否相等}，而不是两两乱比。
+
+那么方差分析到底在“分析”什么？名字里有“方差”，但它关心的其实是\textbf{均值}。它的思路是把数据的总差异拆成两部分：
+\begin{itemize}
+  \item \textbf{组间差异}：各组均值之间的差异，反映“不同组是否真的不一样”；
+  \item \textbf{组内差异}：同一组内部个体之间的差异，反映“随机波动有多大”。
+\end{itemize}
+
+如果组间差异相对组内差异足够大，说明“分组”确实起了作用，各组均值不像是一家人。这个“够不够大”用 $F$ 统计量来衡量：
+\begin{center}
+$F=\dfrac{\text{组间均方}}{\text{组内均方}}$
+\end{center}
+$F$ 越大，对应$p$ 值越小，越有理由认为各组均值存在显著差异。
+
+\begin{remark}
+方差分析有几个基本前提：各组数据近似正态、各组方差大致相等（方差齐性）、各组观测相互独立。前提满足得越好，结果越可靠。
+\end{remark}
 
 \section{单因素方差分析}
+\textbf{单因素方差分析}只考察\textbf{一个因素}，比较这个因素的多个水平（组）之间均值是否有差异。
 
+例如：想比较三种日语教材的教学效果，首先随机把学生分成 3 组，
+每组用不同教材学习一学期，最后比较三组的平均成绩。
+(如果学生已经按照不同教材学习了一学期，则直接收集数据即可，不用从零开始)
+\begin{itemize}
+  \item $H_0$：三组平均成绩相等（即三种教材的教学效果没有差异）；
+  \item $H_1$：至少有一组的平均成绩与其他组不同（即至少一种教材的教学效果与其他教材有差异）。
+\end{itemize}
 
+方差分析的结果通常整理成下面这样一张方差分析表，也可由统计软件自动得出：
+
+\begin{table}[H]
+  \centering
+  \caption{单因素方差分析表}
+  \begin{tabular}{lcccc}
+    \toprule
+    变异来源 & 平方和 & 自由度 & 均方 & $F$ \\
+    \midrule
+    组间 & $SS_B$ & $k-1$ & $MS_B=\frac{SS_B}{k-1}$ & $\frac{MS_B}{MS_W}$ \\
+    组内 & $SS_W$ & $n-k$ & $MS_W=\frac{SS_W}{n-k}$ & \\
+    总计 & $SS_T$ & $n-1$ & & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+其中 $k$ 是组数，$n$ 是总样本量。软件会算出对应的 $p$ 值：若 $p<0.05$，拒绝 $H_0$，认为至少有一组均值不同。
+
+\begin{remark}
+方差分析只能告诉你“有没有差异”，不能告诉你“具体哪两组有差异”。想知道哪两组不同，还要再做\textbf{事后检验}（多重比较），比如 Tukey 检验。
+\end{remark}
 
 \section{双因素方差分析}
+\textbf{双因素方差分析}同时考察\textbf{两个因素}对结果的影响，不仅可以检验每个因素的\textbf{主效应}，还能检验两个因素之间是否存在\textbf{交互效应}。
 
+例如：研究“教学法”（因素 A，3 种）和“性别”（因素 B，2 种）对日语成绩的影响，可以得到 3$\times$2=6 个组合。双因素方差分析会分别检验：
+\begin{itemize}
+  \item 因素 A 的主效应：不同教学法之间成绩是否有差异；
+  \item 因素 B 的主效应：男女之间成绩是否有差异；
+  \item \textbf{交互效应}：教学法的效果是否“看人下菜”，比如某种教学法对女生特别有效、对男生却一般。
+\end{itemize}
 
+交互效应是双因素方差分析最值得关注的地方：如果两个因素之间存在交互作用，就不能只单独看某一个因素的“平均效果”，因为一个因素的效果可能依赖于另一个因素的水平。
+
+\begin{remark}
+画一张“交互图”很有帮助：横轴放一个因素，不同折线代表另一个因素的不同水平。若折线明显交叉或分岔，往往意味着存在交互效应。
+\end{remark}
 
 \section{多因素方差分析}
+\textbf{多因素方差分析}把双因素推广到三个或更多因素，原理完全一样：检验每个因素的\textbf{主效应}，以及因素之间的各种\textbf{交互效应}。
+
+例如：研究“教学法 $\times$ 性别 $\times$ 课时长度”三个因素对日语成绩的影响，就是一个三因素方差分析。
+
+因素一多，事情会变得复杂：
+\begin{itemize}
+  \item 交互项的数量迅速增加（两两交互、三阶交互……）；
+  \item 需要的样本量更大，否则很多组合“没人”；
+  \item 结果解释也更烧脑：高阶交互往往很难用一句话讲清楚。
+\end{itemize}
+
+实际研究中，多因素方差分析通常交给统计软件完成，分析思路和单因素、双因素一脉相承：\textbf{先看交互，再看主效应，最后回到实际问题下结论}。
+
+\begin{remark}
+因素越多不等于越高级。如果样本量不够或交互项解释不清，强行塞很多因素反而会让结论变得不可靠。\textbf{好的设计是“够用就好”，不是“越多越好”。}
+\end{remark}
 
 
 
@@ -347,667 +1193,127 @@
 
 \chapter{线性回归}
 \section{相关不蕴含因果}
+什么是相关性？什么是因果？如果“只要 A 发生，B 就发生”，那 A 和 B 就是因果关系；而相关只表示二者\textbf{存在某种关联}，至于关联有多强、是谁引起谁、有没有第三者在背后捣乱，都还说不准。
 
+举个经典例子：入冬后，某商场短款羽绒服的销量逐渐上升，与此同时，同地区医院的骨折人数也在增加。把两条折线画在一起，趋势几乎同步，相关系数可能还挺高。难道卖羽绒服会导致骨折吗？这显然很荒谬。
 
+其实真正的原因是\textbf{天气变冷}：气温越低，羽绒服卖得越好；同时路面结冰，摔骨折的人也变多。羽绒服销量和骨折人数只是“碰巧一起变”，它们之间并没有因果关系。
+
+所以做统计时要时刻记住三件事：
+\begin{itemize}
+  \item \textbf{相关不意味着因果}：就算两个变量相关到“离谱”，也不能直接说一个导致另一个。
+  \item \textbf{小心伪相关}：冰淇淋销量和溺亡人数、医院数量和奢侈品消费量，这类“纸面上相关、实际上无关”的例子很多，背后往往藏着被忽略的第三因素（比如气温、经济发展水平）。
+  \item \textbf{不要预设结论}：带着“我想要的结果”去分析，容易只看到支持自己的证据。应该从一个公正的问题出发，用数据说话。
+\end{itemize}
+
+\begin{remark}
+相关只能告诉你“它们总是一起变”，因果则需要实验设计、控制变量等更严格的手段才能判断。\textbf{统计上显著的相关，离“因果”还差得远。}
+\end{remark}
 
 \section{线性相关与决定系数$R^2$}
+当两个数值变量大致呈直线关系时，我们用\textbf{相关系数} $r$ 来度量线性相关的方向和强弱：
+\begin{center}
+$r\in[-1,1]$
+\end{center}
+\begin{itemize}
+  \item $r>0$：正相关，一个变大另一个也变大；
+  \item $r<0$：负相关，一个变大另一个变小；
+  \item $|r|$ 越接近 1，线性关系越强；越接近 0，线性关系越弱。
+\end{itemize}
 
+光看 $r$ 还不够，我们常常更关心：\textbf{$x$ 的变化能解释 $y$ 的多少变化？}这就用到\textbf{决定系数}：
+\begin{center}
+$R^2=r^2$
+\end{center}
+$R^2$ 的取值范围是 $[0,1]$，它表示\textbf{因变量 $y$ 的变异中有多大比例能被自变量 $x$ 的线性关系解释}。
 
+例如，$r=0.8$ 时，$R^2=0.64$，意思是“学习时间”这个变量大约能解释“成绩”变异的 64\%，剩下 36\% 来自其他因素或随机波动。
+
+\begin{remark}
+$R^2$ 高说明线性拟合得好，但\textbf{不说明 $x$ 就是 $y$ 的原因}。哪怕 $R^2=0.99$，也可能只是伪相关。相关和回归描述的是“关系”，不是“因果”。
+\end{remark}
 
 \section{单变量线性回归}
+\textbf{单变量线性回归}（也叫一元线性回归）用\textbf{一个}自变量 $x$ 去预测因变量 $y$，模型写成：
+\begin{center}
+$y=a+bx+\varepsilon$
+\end{center}
+其中 $a$ 是截距，$b$ 是斜率，$\varepsilon$ 是随机误差。拟合出来的一条直线叫\textbf{回归线}：
+\begin{center}
+$\hat{y}=a+bx$
+\end{center}
+
+回归线怎么找？最常用的方法是\textbf{最小二乘法}：让所有样本点到回归线的竖直距离（残差）的平方和最小。
+
+例如，用“每天学习时间”预测“日语成绩”，10 名同学的数据可以拟合成
+\begin{center}
+$\hat{y}=50.25+4.15x$
+\end{center}
+意思是：学习时间每增加 1 小时，成绩平均提高约 4.15 分；学习 0 小时时，成绩的“基准”约为 50.25 分。
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        xlabel={每天学习时间（小时）},
+        ylabel={日语成绩（分）},
+        xmin=1, xmax=12,
+        ymin=50, ymax=100,
+        title={学习时间与日语成绩的回归线}
+      ]
+      \addplot[only marks, main] coordinates {(2,58) (3,62) (4,68) (5,71) (6,75) (7,80) (8,83) (9,88) (10,92) (11,95)};
+      \addplot[domain=2:11, thick] {50.2545+4.14545*x};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{学习时间与日语成绩的散点图及回归线}
+\end{figure}
+
+\begin{remark}
+回归线只能描述“平均而言”的关系，不代表每个个体都严格落在线上。而且用回归做预测时，最好只在数据范围(2-11h)内外推一点点，别拿它预测“每天学 18 小时”这种离谱情况。
+\end{remark}
 
 
 
 \section{双变量线性回归}
+\textbf{双变量线性回归}用\textbf{两个}自变量 $x_1,x_2$ 预测 $y$：
+\begin{center}
+$y=a+b_1x_1+b_2x_2+\varepsilon$
+\end{center}
 
+例如，除了“每天学习时间”，再加入“每周复习次数”一起预测日语成绩：
+\begin{center}
+$\hat{y}=a+b_1\cdot\text{学习时间}+b_2\cdot\text{复习次数}$
+\end{center}
 
+双变量回归和单变量回归最大的不同在于：每个系数 $b_1,b_2$ 表示的是\textbf{在控制另一个变量不变的情况下}，该变量每增加一个单位时 $y$ 的平均变化。这就是“控制变量”的思想。
+
+\begin{itemize}
+  \item $b_1$：复习次数不变时，学习时间每多 1 小时，成绩平均变化多少；
+  \item $b_2$：学习时间不变时，复习次数每多 1 次，成绩平均变化多少。
+\end{itemize}
+
+\begin{remark}
+如果两个自变量彼此高度相关（比如“学习时间”和“复习次数”本来就一起变），就很难把它们的贡献分清楚，这叫\textbf{多重共线性}。变量之间越“独立”，系数的解释越干净。
+\end{remark}
 
 \section{多变量线性回归}
+\textbf{多变量线性回归}把自变量推广到 $k$ 个：
+\begin{center}
+$y=a+b_1x_1+b_2x_2+\cdots+b_kx_k+\varepsilon$
+\end{center}
 
-
-
-
-
-
-
-\chapter{原书使用代码}
-\section{表格}
-
-\begin{table}[htbp]
-  \centering
-  \caption{封面元素信息}
-  \begin{tabular}{p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}}
-    \toprule
-    信息 & 命令 & 信息 & 命令 & 信息 & 命令 \\
-    \midrule
-    标题 & \lstinline|\title| & 副标题 & \lstinline|\subtitle| & 作者 & \lstinline|\author| \\
-    机构 & \lstinline|\institute| & 日期 &  \lstinline|\date| & 版本 & \lstinline|\version| \\
-    箴言 & \lstinline|\extrainfo| & 封面图 & \lstinline|\cover| & 徽标 & \lstinline|\logo| \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-另外，额外增加一个 \lstinline{\bioinfo} 命令，有两个选项，分别是信息标题以及信息内容。比如需要显示{\kaishu User Name：111520}，则可以使用 
-\begin{lstlisting}
-\bioinfo{User Name}{115520}
-\end{lstlisting}
-
-封面中间位置的色块的颜色可以使用下面命令进行修改：
-\begin{lstlisting}
-\definecolor{customcolor}{RGB}{32,178,170}
-\colorlet{coverlinecolor}{customcolor}
-\end{lstlisting}
-
-
-
-\section{章标标题}
-
-本模板内置 2 套\textit{章标题显示风格}，包含 \lstinline{hang}（默认）与 \lstinline{display} 两种风格，区别在于章标题单行显示（\lstinline{hang}）与双行显示（\lstinline{display}），本说明使用了 \lstinline{hang}。调用方式为
-\begin{lstlisting}
-\documentclass[hang]{elegantbook} %or
-\documentclass[titlestyle=hang]{elegantbook}
-\end{lstlisting}
-
-在章标题内，章节编号默认是以数字显示，也即{\kaishu 第 1 章}，{\kaishu 第 2 章}等等，如果想要把数字改为中文，可以使用
-\begin{lstlisting}
-\documentclass[chinese]{elegantbook} %or
-\documentclass[scheme=chinese]{elegantbook}
-\end{lstlisting}
-
-
-
-\section{语言}
-本模板内含两套基础语言环境 \lstinline{lang=cn}、\lstinline{lang=en}。改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
-\begin{lstlisting}
-\documentclass[cn]{elegantbook} 
-\documentclass[lang=cn]{elegantbook}
-\end{lstlisting}
-
-除模板自带的两套语言设定之外，由\textbf{网友}提供的其他语言环境设置如下：
+它的思想和双变量完全一样：每个系数都是在“其他变量不变”的前提下，该变量的单独效应。只是变量一多，事情会变复杂：
 \begin{itemize}
-  \item 由 \href{https://github.com/VincentMVV}{VincentMVV} 提供的意大利语翻译 \lstinline{lang=it}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
-  \item 由 \href{https://github.com/abfek66}{abfek66} 提供的法语翻译 \lstinline{lang=fr}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
-  % \item 由 \href{https://github.com/stultus}{stultus} 提供的马拉雅拉姆语翻译 \lstinline{lang=}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/90}{Malayalam translation}；
-  \item 由 \href{https://github.com/inktvis75}{inktvis75} 提供的荷兰语翻译 \lstinline{lang=nl}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/108}{Dutch Translation}；
-  \item 由 \href{https://github.com/palkotamas}{palkotamas} 提供的匈牙利语翻译 \lstinline{lang=hu}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/111}{Hungarian translation}；
-  \item 由 Lisa 提供的德语翻译 \lstinline{lang=de}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation}；
-  \item 由 Gustavo A. Corradi 提供的西班牙语的翻译 \lstinline{lang=es}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/133}{Spanish translation}；
-  \item 由 \href{https://github.com/Altantsooj}{Altantsooj} 提供的蒙古语的翻译 \lstinline{lang=mn}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation}；
-  \item 由 \href{https://github.com/inusturbo}{inusturbo} 提供的日本语的翻译 \lstinline{lang=jp}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/172}{Japanese Translation}。
+  \item 需要的样本量更大，否则系数估计不稳定；
+  \item 变量之间可能互相纠缠（多重共线性）；
+  \item 塞太多没用的变量容易\textbf{过拟合}——在已有数据上拟合得很好，但换一批数据就“失灵”。
 \end{itemize}
 
-\begin{remark}
-以上各个语言的设定均为网友设定，我们未对上述翻译进行过校对，如果有问题，请在对应的 issue 下评论。并且，只有中文环境（\lstinline{lang=cn}）才可以输入中文。
-\end{remark}
-
-
-
-\section{数学环境简介}
-
-在我们这个模板中，我们定义了两种不同的定理模式 \lstinline{mode}，包括简单模式（\lstinline{simple}）和炫彩模式（\lstinline{fancy}），默认为 \lstinline{fancy} 模式，不同模式的选择为
-\begin{lstlisting}
-\documentclass[simple]{elegantbook} %or
-\documentclass[mode=simple]{elegantbook}
-\end{lstlisting}
-
-本模板定义了四大类环境
-
-\begin{itemize}
-  \item \textit{定理类环境}，包含标题和内容两部分，全部定理类环境的编号均以章节编号。根据格式的不同分为 3 种
-    \begin{itemize}
-      \item \textcolor{main}{\textbf{definition}} 环境，颜色为 \textcolor{main}{main}；
-      \item \textcolor{second}{\textbf{theorem、lemma、corollary、axiom、postulate}} 环境，颜色为 \textcolor{second} {second}；
-      \item \textcolor{third}{\textbf{proposition}} 环境，颜色为 \textcolor{third}{third}。
-    \end{itemize}
-  \item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
-  \item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
-  \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property、remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
-\end{itemize}
-
-\subsection{定理类环境的使用}
-
-由于本模板使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，定理的使用方法如下：
-\begin{lstlisting}
-\begin{theorem}{theorem name}{label}
-  The content of theorem.
-\end{theorem}
-\end{lstlisting}
-
-第一个必选项 \lstinline{theorem name} 是定理的名字，第二个必选项 \lstinline{label} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。
-
-在用户多次反馈下，4.x 之后，引入了原生定理的支持方式，也就是使用可选项方式：
-
-\begin{lstlisting}
-\begin{theorem}[theorem name] \label{thm:theorem-label}
-  The content of theorem.
-\end{theorem}
-% or 
-\begin{theorem} \label{thm:theorem-withou-name}
-  The content of theorem without name.
-\end{theorem}
-\end{lstlisting}
-
-其他相同用法的定理类环境有：
-
-\begin{table}[htbp]
-   \centering
-   \caption{定理类环境}
-     \begin{tabular}{llll}
-     \toprule
-     环境名 & 标签名 & 前缀 & 交叉引用 \\
-     \midrule
-     definition & label & def   & \lstinline|\ref{def:label}| \\
-     theorem & label & thm   & \lstinline|\ref{thm:label}| \\
-     postulate & label & pos & \lstinline|\ref{pos:label}| \\
-     axiom & label & axi & \lstinline|\ref{axi:label}|\\
-     lemma & label & lem   & \lstinline|\ref{lem:label}| \\
-     corollary & label & cor   & \lstinline|\ref{cor:label}| \\
-     proposition & label & pro   & \lstinline|\ref{pro:label}| \\
-     \bottomrule
-     \end{tabular}%
-   \label{tab:theorem-class}%
- \end{table}%
- 
-% \subsection{算法环境}
-
- 
-% \begin{algorithm}\label{alg:test}
-%   \Input{A bitmap $I$ of size $w \times l$}
-%   \Output{A partition of the bitmap}
-%   \BlankLine
-%   \emph{special treatment of the first line}\;
-%   \For{$i \leftarrow 2$ \KwTo $l$}{
-%     \emph{special treatment of the first element of line $i$}\;
-%     \For{$j \leftarrow 2$ \KwTo $w$}{\label{forins}
-%       $\Left \leftarrow \FindCompress{$I[i,j-1]$}$\;
-%       $\Up \leftarrow \FindCompress{$I[i-1,]$}$\;
-%       $\This \leftarrow \FindCompress{$I[i,j]$}$\;
-%       \If(\tcp*[h]{O(\Left,\This)==1}){\Left compatible with \This}{\label{lt}
-%         \lIf{$\Left < \This$}{$\Union{\Left,\This}$}
-%         \lElse{$\Union{\This,\Left}$}
-%       }
-%       \If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
-%         \lIf{$\Up < \This$}{$\Union{\Up,\This}$}
-%         \tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
-%         \lElse{$\Union{\This,\Up}$}\tcp*[r]{\This{} linked to \Up}\label{lelse}
-%       }
-%     }
-%     \lForEach{element $e$ of the line $i$}{\FindCompress{p}}
-%   }
-%   \caption{disjoint decomposition}\label{algo_disjdecomp}
-% \end{algorithm}
-
-
-\subsection{修改计数器}
-
-当前定理等环境计数器按章计数，如果想修改定理类环境按节计数，可以修改计数器选项 thmcnt：
-
-\begin{lstlisting}
-  \documentclass[section]{elegantbook} %or
-  \documentclass[thmcnt=section]{elegantbook}
-\end{lstlisting}
-
-
-\subsection{其他环境的使用}
-
-其他三种环境没有选项，可以直接使用，比如 \lstinline{example} 环境的使用方法与效果：
-\begin{lstlisting}
-\begin{example}
-   This is the content of example environment.
-\end{example}
-\end{lstlisting}
-
-这几个都是同一类环境，区别在于
-
-\begin{itemize}
-  \item 示例环境（example）、练习（exercise）与例题（problem）章节自动编号；
-  \item 注意（note），练习（exercise）环境有提醒引导符；
-  \item 结论（conclusion）等环境都是普通段落环境，引导词加粗。
-\end{itemize}
-
-\section{列表环境}
-本模板借助于 \lstinline{tikz} 定制了 \lstinline{itemize} 和 \lstinline{enumerate} 环境，其中 \lstinline{itemize} 环境修改了 3 层嵌套，而 \lstinline{enumerate} 环境修改了 4 层嵌套（仅改变颜色）。示例如下\\[2ex]
-\begin{minipage}[b]{0.49\textwidth}
-  \begin{itemize}
-    \item first item of nesti;
-    \item second item of nesti;
-      \begin{itemize}
-        \item first item of nestii;
-        \item second item of nestii;
-        \begin{itemize}
-          \item first item of nestiii;
-          \item second item of nestiii.
-        \end{itemize}   
-      \end{itemize}
-  \end{itemize}
-\end{minipage}
-\begin{minipage}[b]{0.49\textwidth}
-  \begin{enumerate}
-    \item first item of nesti;
-    \item second item of nesti;
-      \begin{enumerate}
-        \item first item of nestii;
-        \item second item of nestii;
-        \begin{enumerate}
-          \item first item of nestiii;
-          \item second item of nestiii.
-        \end{enumerate}   
-      \end{enumerate}
-  \end{enumerate}
-\end{minipage}
-
-
-
-\section{参考文献}
-文献部分，本模板调用了 biblatex 宏包，并提供了 biber（默认） 和 bibtex 两个后端选项，可以使用 \lstinline{bibend} 进行修改：
-
-\begin{lstlisting}
-  \documentclass[bibtex]{elegantbook}
-  \documentclass[bibend=bibtex]{elegantbook}
-\end{lstlisting}
-
-关于文献条目（bib item），你可以在谷歌学术，Mendeley，Endnote 中取，然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。
-
-为了方便文献样式修改，模板引入了 \lstinline{bibstyle} 和 \lstinline{citestyle} 选项，默认均为数字格式（numeric），参考文献示例：\cite{cn1,en2,en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
-
-如果需要设置为国标 GB7714-2015，需要使用：
-\begin{lstlisting}
-  \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
-\end{lstlisting}
-
-如果需要添加排序方式，可以在导言区加入
-\begin{lstlisting}
-  \ExecuteBibliographyOptions{sorting=ynt}
-\end{lstlisting}
-
-启用国标之后，可以加入 \lstinline{sorting=gb7714-2015}。
-
-
-
-\section{添加序章}
-
-如果你想在第一章前面添序章，不改变原本章节序号，可以在第一章内容前面使用 
-\begin{lstlisting}
-\chapter*{Introduction}
-\markboth{Introduction}{Introduction}
-The content of introduction.
-\end{lstlisting}
-
-
-
-\section{目录选项与深度}
-本模板添加了一个目录选项 \lstinline{toc}，可以设置目录为单栏（\lstinline{onecol}）和双栏（\lstinline{twocol}）显示，比如双栏显示可以使用
-\begin{lstlisting}
-\documentclass[twocol]{elegantbook}
-\documentclass[toc=twocol]{elegantbook}
-\end{lstlisting}
-
-默认本模板目录深度为 1，你可以在导言区使用
-\begin{lstlisting}
-\setcounter{tocdepth}{2}
-\end{lstlisting}
-将其修改为 2 级目录（章与节）显示。
-
-
-
-\section{章节摘要}
-模板新增了一个章节摘要环境（introduction），使用示例
-\begin{lstlisting}
-\begin{introduction}
-  \item Definition of Theorem
-  \item Ask for help
-  \item Optimization Problem
-  \item Property of Cauchy Series
-  \item Angle of Corner
-\end{introduction}
-\end{lstlisting}
-效果如下：
-\begin{introduction}
-  \item Definition of Theorem
-  \item Ask for help
-  \item Optimization Problem
-  \item Property of Cauchy Series
-  \item Angle of Corner
-\end{introduction}
-
-环境的标题文字可以通过这个环境的可选参数进行修改，修改方法为：
-\begin{lstlisting}
-\begin{introduction}[Brief Introduction]
-...
-\end{introduction}
-\end{lstlisting}
-
-
-
-\section{章后习题}
-前面我们介绍了例题和练习两个环境，这里我们再加一个，章后习题（\lstinline{problemset}）环境，用于在每一章结尾，显示本章的练习。使用方法如下
-
-\begin{lstlisting}
-\begin{problemset}
-  \item exercise 1
-  \item exercise 2
-  \item exercise 3
-\end{problemset}
-\end{lstlisting}
-
-
-效果如下：
-\begin{problemset}
-  \item exercise 1
-  \item exercise 2
-  \item exercise 3
-  \item 测试数学公式
-  \begin{equation}
-    a^2+b^2=c_{2_{i}} (1,2) [1,23]
-  \end{equation}
-\end{problemset}
+实际建模时，通常先用相关系数和散点图观察变量关系，再逐步筛选变量、检查残差，最后用 $R^2$、调整 $R^2$ 和 $p$ 值等评估模型。
 
 \begin{remark}
-如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
+模型不是“变量越多越好”。\textbf{简单、可解释、经得起新数据检验的模型，往往比塞满变量的复杂模型更有用。}
 \end{remark}
-
-\begin{solution}
-如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
-\end{solution}
-
-
-
-\section{旁注}
-
-在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！不过我们保留了 \lstinline{marginpar} 这个选项，你可以使用 \lstinline{marginpar=margintrue} 获得保留右侧旁注的版面设计。然后使用系统自带的 \lstinline{\marginpar} 或者 \lstinline{marginnote} 宏包的 \lstinline{\marginnote} 命令。
-
-\begin{remark}
-在使用旁注的时候，需要注意的是，文本和公式可以直接在旁注中使用。
-
-\begin{lstlisting}
-% text
-\marginpar{margin paragraph text}
-
-% equation
-\marginpar{
-  \begin{equation}
-    a^2 + b^2 = c^2
-  \end{equation}
-}
-\end{lstlisting}
-
-但是浮动体（表格、图片）需要注意，不能用浮动体环境，需要使用直接插图命令或者表格命令环境。然后使用 \lstinline{\captionof} 为其设置标题。为了得到居中的图表，可以使用 \lstinline{\centerline} 命令或者 \lstinline{center} 环境。更多详情请参考：\href{https://tex.stackexchange.com/questions/5583/caption-of-figure-in-marginpar-and-caption-of-wrapfigure-in-margin}{Caption of Figure in Marginpar}。
-
-\begin{lstlisting}
-% graph with centerline command
-\marginpar{
-  \centerline{
-    \includegraphics[width=0.2\textwidth]{logo.png}
-  }
-  \captionof{figure}{your figure caption}
-}
-
-% graph with center environment
-\marginpar{
-  \begin{center}
-    \includegraphics[width=0.2\textwidth]{logo.png}
-    \captionof{figure}{your figure caption}
-  \end{center}
-}
-\end{lstlisting}
-
-\end{remark}
-
-
-
-\section{数学字体选项}
-
-本模板定义了一个数学字体选项（\lstinline{math}），可选项有三个：
-\begin{enumerate}
-  \item \lstinline{math=cm}（默认），使用 \LaTeX{} 默认数学字体（推荐，无需声明）；
-  \item \lstinline{math=newtx}，使用 \lstinline{newtxmath} 设置数学字体（潜在问题比较多）。
-  \item \lstinline{math=mtpro2}，使用 \lstinline{mtpro2} 宏包设置数学字体，要求用户已经成功安装此宏包。
-\end{enumerate}
-
-
-
-\section{使用 newtx 系列字体}
-
-如果需要使用原先版本的 \lstinline{newtx} 系列字体，可以通过显示声明数学字体：
-
-\begin{lstlisting}
-\documentclass[math=newtx]{elegantbook}
-\end{lstlisting}
-
-\subsection{连字符}
-
-如果使用 \lstinline{newtx} 系列字体宏包，需要注意下连字符的问题。
-\begin{equation}
-  \int_{R^q} f(x,y) dy.\emph{of\kern0pt f}
-\end{equation}
-的代码为
-\begin{lstlisting}
-\begin{equation}
-  \int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
-\end{equation}
-\end{lstlisting}
-
-\subsection{宏包冲突}
-
-另外在 3.08 版本中，有用户反馈模板在和 \lstinline{yhmath} 以及 \lstinline{esvect} 等宏包搭配使用的时候会出现报错：
-\begin{lstlisting}
-LaTeX Error:
-   Too many symbol fonts declared.
-\end{lstlisting}
-
-原因是在使用 \lstinline{newtxmath} 宏包时，重新定义了数学字体用于大型操作符，达到了 {\heiti 最多 16 个数学字体} 的上限，在调用其他宏包的时候，无法新增数学字体。为了减少调用非常用宏包，在此给出如何调用 \lstinline{yhmath} 以及 \lstinline{esvect} 宏包的方法。
-
-请在 \lstinline{elegantbook.cls} 内搜索 \lstinline{yhmath} 或者 \lstinline{esvect}，将你所需要的宏包加载语句\textit{取消注释}即可。
-\begin{lstlisting}
-%%% use yhmath pkg, uncomment following code
-% \let\oldwidering\widering
-% \let\widering\undefined
-% \RequirePackage{yhmath}
-% \let\widering\oldwidering
-
-%%% use esvect pkg, uncomment following code
-% \RequirePackage{esvect}
-\end{lstlisting}
-
-
-
-\section{中文字体选项}
-模板从 3.10 版本提供中文字体选项 \lstinline{chinesefont}，可选项有
-\begin{enumerate}
-\item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
-\item \lstinline{founder}：方正字体选项（\textbf{需要安装方正字体}），后台调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文，用户只需要安装方正字体即可使用该选项。
-\item \lstinline{nofont}：后台会调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
-\end{enumerate}
-
-\subsection{方正字体选项}
-由于使用 \lstinline{ctex} 宏包默认调用系统已有的字体，部分系统字体缺失严重，因此，用户希望能够使用其它字体，我们推荐使用方正字体。方正的{\songti 方正书宋}、{\heiti 方正黑体}、{\kaishu 方正楷体}、{\fangsong 方正仿宋}四款字体均可免费试用，且可用于商业用途。用户可以自行从\href{http://www.foundertype.com/}{方正字体官网}下载此四款字体，在下载的时候请\textbf{务必}注意选择 GBK 字符集，也可以使用 \href{https://www.latexstudio.net/}{\LaTeX{} 工作室}提供的\href{https://pan.baidu.com/s/1BgbQM7LoinY7m8yeP25Y7Q}{方正字体，提取码为：njy9} 进行安装。安装时，{\kaishu Win 10 用户请右键选择为全部用户安装，否则会找不到字体。}
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=0.9\textwidth]{founder.png}
-\end{figure}
-
-\subsection{其他中文字体}
-如果你想完全自定义字体\footnote{这里仍然以方正字体为例。}，你可以选择 \lstinline{chinesefont=nofont}，然后在导言区设置
-\begin{lstlisting}
-\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
-\setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
-\setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
-\setCJKfamilyfont{zhsong}{FZShuSong-Z01}
-\setCJKfamilyfont{zhhei}{FZHei-B01}
-\setCJKfamilyfont{zhkai}[BoldFont={FZHei-B01}]{FZKai-Z03}
-\setCJKfamilyfont{zhfs}[BoldFont={FZHei-B01}]{FZFangSong-Z02}
-\newcommand*{\songti}{\CJKfamily{zhsong}}
-\newcommand*{\heiti}{\CJKfamily{zhhei}}
-\newcommand*{\kaishu}{\CJKfamily{zhkai}}
-\newcommand*{\fangsong}{\CJKfamily{zhfs}}
-\end{lstlisting}
-
-
-
-\section{积分的定义}
-
-我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
-
-\begin{definition}[可积性] \label{def:int} 
-设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的\textbf{非负简单函数}，中文其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
-\begin{equation}
-   \label{inter}
-   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
-\end{equation}
-一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
-\end{definition}
-
-
-
-\begin{exercise}\label{exer:43}
-设 $f \notin\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
-\begin{equation}
-   \label{ex:1}
-   I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
-\end{equation}
-是 $\mathcal{R}^1$ 上的连续函数。 
-\end{exercise}
-
-\begin{solution}
-即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
-\end{solution}
-
-\begin{proof}
-即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
-\end{proof}
-
-
-
-\begin{theorem}[Fubini 定理] \label{thm:fubi} 
-（1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
-\begin{equation}
-   \label{eq:461}
-   \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
-\end{equation}
-
-（2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\ref{eq:461} 成立。
-\end{theorem}
-
-\ref{thm:fubi}
-
-
-
-\begin{note}
-在本模板中，引理（lemma），推论（corollary）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
-\end{note}
-
-\begin{proposition}[最优性原理] \label{pro:max}
-如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s, T]$ 任意子区间都是最优解，假设区间为 $[t_0, t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
-\end{proposition}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.6\textwidth]{scatter.jpg}
-  \caption{散点图示例 $\hat{y}=a+bx$ \label{fig:scatter}}
-\end{figure}
-
-以最简单的一元线性模型来解释最小二乘法。什么是一元线性模型呢？监督学习中，如果预测的变量是离散的，我们称其为分类（如决策树，支持向量机等），如果预测的变量是连续的，我们称其为回归。回归分析中，如果只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。对于二维空间线性是一条直线；对于三维空间线性是一个平面，对于多维空间线性是一个超平面。
-
-\begin{property}\label{property:cauchy}
-柯西列的性质
-\begin{enumerate}
-\item $\{x_k\}$ 是柯西列，则其子列 $\{x_k^i\}$ 也是柯西列。
-\item $x_k\in \mathcal{R}^n$，$\rho(x,y)$ 是欧几里得空间，则柯西列收敛，$(\mathcal{R}^n,\rho)$ 空间是完备的。
-\end{enumerate}
-\end{property}
-
-\begin{conclusion}
-回归分析（regression analysis) 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
-\end{conclusion}
-
-
-
-\section{模板颜色主题}
-本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
-\begin{lstlisting}
-\documentclass[green]{elegantbook} %or
-\documentclass[color=green]{elegantbook}
-\end{lstlisting}
-
-\begin{table}[htbp]
-  \caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
-  \centering
-  \begin{tabular}{ccccccc}
-  \toprule
-    & \textcolor{structure1}{green} 
-    & \textcolor{structure2}{cyan} 
-    & \textcolor{structure3}{blue}
-    & \textcolor{structure4}{gray} 
-    & \textcolor{structure5}{black} 
-    & 主要使用的环境\\
-  \midrule
-    structure & \ccr{structure1}
-    & \ccr{structure2}
-    & \ccr{structure3} 
-    & \ccr{structure4} 
-    & \ccr{structure5} 
-    & chapter \ section \ subsection \\
-    main      & \ccr{main1}
-    & \ccr{main2}
-    & \ccr{main3}
-    & \ccr{main4}
-    & \ccr{main5}
-    & definition \ exercise \ problem \\
-    second    & \ccr{second1}
-    & \ccr{second2}
-    & \ccr{second3}
-    & \ccr{second4}
-    & \ccr{second5}
-    & theorem \ lemma \ corollary\\
-    third     & \ccr{third1}
-    & \ccr{third2}
-    & \ccr{third3}
-    & \ccr{third4}
-    & \ccr{third5}
-    & proposition\\
-  \bottomrule
-  \end{tabular}
-\end{table}
-
-如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structurecolor、main、second、third 颜色，具体方法如下：
-\begin{lstlisting}[tabsize=4]
-\definecolor{structurecolor}{RGB}{0,0,0}
-\definecolor{main}{RGB}{70,70,70}    
-\definecolor{second}{RGB}{115,45,2}    
-\definecolor{third}{RGB}{0,80,80}
-\end{lstlisting}
-
-
-
-\section{常见问题}
-
-\begin{enumerate}[itemsep=1.5ex]
-  \item \question{有没有办法章节用“第一章，第一节，（一）”这种？}
-    见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
-  \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
-    页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
-  \item \question{\lstinline[breaklines]{Package ctex Error: CTeX fontset 'Mac' is unavailable.}}
-    在 Mac 系统下，中文编译请使用 \hologo{XeLaTeX}。
-  \item \question{\lstinline{! LaTeX Error: Unknown option 'scheme=plain' for package 'ctex'.}}
-    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2022。
-  \item \question{我该使用什么版本？}
-    请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2021 内获取。
-  \item \question{我该使用什么编辑器？}
-    你可以使用 \TeX{} Live 2021 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2021 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
-  \item \question{您好，我们想用您的 ElegantBook 模板写一本书。关于机器学习的教材，希望获得您的授权，谢谢您的宝贵时间。}
-    模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
-  \item \question{请问交叉引用是什么？}
-    本群和本模板适合有一定 \LaTeX{} 基础的用户使用，新手请先学习 \LaTeX{} 的基础，理解各种概念，否则你将寸步难行。
-  \item \question{代码高亮环境能用其他语言吗？}
-    可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lsset} 命令，更多信息请参考宏包文档。
-  \item \question{群主，什么时候出 Beamer 的模板（主题），ElegantSlide 或者 ElegantBeamer？}
-    由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。后续确定不会再出任何主题/模板，请大家根据需要修改已有主题。
-\end{enumerate}
-
-
-
-
 
 
 
@@ -1021,16 +1327,135 @@ LaTeX Error:
 \appendix
 
 \chapter{各分布的概率临界值表}
+本附录收录了 $t$ 分布、$\chi^2$ 分布和 $F$ 分布的常用临界值表，供查阅。
 
-本附录包括了统计中常用到的一些分布，我们扼要论述了求和算子的各种性质，研究了线性和某些非线性方程的性质，并复习了比例和百分数。我们还介绍了一些在应用计量经济学中常见的特殊函数，包括二次函数和自然对数，前 4 节只要求基本的代数技巧，第 5 节则对微分学进行了简要回顾；虽然要理解本书的大部分内容，微积分并非必需，但在一些章末附录和第 3 篇某些高深专题中，我们还是用到了微积分。
+\section{$t$分布}
+$t$ 分布临界值表给出的是：在给定自由度 df 和上尾概率 $\alpha$ 下，满足 $P(T>t_{\alpha})=\alpha$ 的临界值 $t_{\alpha}$。查表时先找自由度所在的行，再找对应的 $\alpha$ 列。
 
-\section{求和算子与描述统计量}
+\begin{table}[H]
+  \centering
+  \caption{$t$ 分布临界值表（上尾概率 $\alpha$）}
+  \small
+  \begin{tabular}{c|ccccc}
+    \toprule
+    df & 0.10 & 0.05 & 0.025 & 0.01 & 0.005 \\
+    \midrule
+    1 & 3.078 & 6.314 & 12.706 & 31.821 & 63.657 \\
+    2 & 1.886 & 2.920 & 4.303 & 6.965 & 9.925 \\
+    3 & 1.638 & 2.353 & 3.182 & 4.541 & 5.841 \\
+    4 & 1.533 & 2.132 & 2.776 & 3.747 & 4.604 \\
+    5 & 1.476 & 2.015 & 2.571 & 3.365 & 4.032 \\
+    6 & 1.440 & 1.943 & 2.447 & 3.143 & 3.707 \\
+    7 & 1.415 & 1.895 & 2.365 & 2.998 & 3.499 \\
+    8 & 1.397 & 1.860 & 2.306 & 2.896 & 3.355 \\
+    9 & 1.383 & 1.833 & 2.262 & 2.821 & 3.250 \\
+    10 & 1.372 & 1.812 & 2.228 & 2.764 & 3.169 \\
+    11 & 1.363 & 1.796 & 2.201 & 2.718 & 3.106 \\
+    12 & 1.356 & 1.782 & 2.179 & 2.681 & 3.055 \\
+    13 & 1.350 & 1.771 & 2.160 & 2.650 & 3.012 \\
+    14 & 1.345 & 1.761 & 2.145 & 2.624 & 2.977 \\
+    15 & 1.341 & 1.753 & 2.131 & 2.602 & 2.947 \\
+    16 & 1.337 & 1.746 & 2.120 & 2.583 & 2.921 \\
+    17 & 1.333 & 1.740 & 2.110 & 2.567 & 2.898 \\
+    18 & 1.330 & 1.734 & 2.101 & 2.552 & 2.878 \\
+    19 & 1.328 & 1.729 & 2.093 & 2.539 & 2.861 \\
+    20 & 1.325 & 1.725 & 2.086 & 2.528 & 2.845 \\
+    21 & 1.323 & 1.721 & 2.080 & 2.518 & 2.831 \\
+    22 & 1.321 & 1.717 & 2.074 & 2.508 & 2.819 \\
+    23 & 1.319 & 1.714 & 2.069 & 2.500 & 2.807 \\
+    24 & 1.318 & 1.711 & 2.064 & 2.492 & 2.797 \\
+    25 & 1.316 & 1.708 & 2.060 & 2.485 & 2.787 \\
+    26 & 1.315 & 1.706 & 2.056 & 2.479 & 2.779 \\
+    27 & 1.314 & 1.703 & 2.052 & 2.473 & 2.771 \\
+    28 & 1.313 & 1.701 & 2.048 & 2.467 & 2.763 \\
+    29 & 1.311 & 1.699 & 2.045 & 2.462 & 2.756 \\
+    30 & 1.310 & 1.697 & 2.042 & 2.457 & 2.750 \\
+    40 & 1.303 & 1.684 & 2.021 & 2.423 & 2.704 \\
+    60 & 1.296 & 1.671 & 2.000 & 2.390 & 2.660 \\
+    120 & 1.289 & 1.658 & 1.980 & 2.358 & 2.617 \\
+    $\infty$ & 1.282 & 1.645 & 1.960 & 2.326 & 2.576 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-\textbf{求和算子} 是用以表达多个数求和运算的一个缩略符号，它在统计学和计量经济学分析中扮演着重要作用。如果 $\{x_i: i=1, 2, \ldots, n\}$ 表示 $n$ 个数的一个序列，那么我们就把这 $n$ 个数的和写为：
+\section{$\chi^2$分布}
+$\chi^2$ 分布临界值表给出的是：在给定自由度 df 和上尾概率 $\alpha$ 下，满足 $P(\chi^2>\chi^2_{\alpha})=\alpha$ 的临界值。
 
-\begin{equation}
-\sum_{i=1}^n x_i \equiv x_1 + x_2 +\cdots + x_n
-\end{equation}
+\begin{table}[H]
+  \centering
+  \caption{$\chi^2$ 分布临界值表（上尾概率 $\alpha$）}
+  \small
+  \begin{tabular}{c|ccccc}
+    \toprule
+    df & 0.10 & 0.05 & 0.025 & 0.01 & 0.001 \\
+    \midrule
+    1 & 2.706 & 3.841 & 5.024 & 6.635 & 10.828 \\
+    2 & 4.605 & 5.991 & 7.378 & 9.210 & 13.816 \\
+    3 & 6.251 & 7.815 & 9.348 & 11.345 & 16.266 \\
+    4 & 7.779 & 9.488 & 11.143 & 13.277 & 18.467 \\
+    5 & 9.236 & 11.070 & 12.833 & 15.086 & 20.515 \\
+    6 & 10.645 & 12.592 & 14.449 & 16.812 & 22.458 \\
+    7 & 12.017 & 14.067 & 16.013 & 18.475 & 24.322 \\
+    8 & 13.362 & 15.507 & 17.535 & 20.090 & 26.125 \\
+    9 & 14.684 & 16.919 & 19.023 & 21.666 & 27.877 \\
+    10 & 15.987 & 18.307 & 20.483 & 23.209 & 29.588 \\
+    11 & 17.275 & 19.675 & 21.920 & 24.725 & 31.264 \\
+    12 & 18.549 & 21.026 & 23.337 & 26.217 & 32.910 \\
+    13 & 19.812 & 22.362 & 24.736 & 27.688 & 34.528 \\
+    14 & 21.064 & 23.685 & 26.119 & 29.141 & 36.123 \\
+    15 & 22.307 & 24.996 & 27.488 & 30.578 & 37.697 \\
+    16 & 23.542 & 26.296 & 28.845 & 32.000 & 39.252 \\
+    17 & 24.769 & 27.587 & 30.191 & 33.409 & 40.790 \\
+    18 & 25.989 & 28.869 & 31.526 & 34.805 & 42.312 \\
+    19 & 27.204 & 30.144 & 32.852 & 36.191 & 43.820 \\
+    20 & 28.412 & 31.410 & 34.170 & 37.566 & 45.315 \\
+    21 & 29.615 & 32.671 & 35.479 & 38.932 & 46.797 \\
+    22 & 30.813 & 33.924 & 36.781 & 40.289 & 48.268 \\
+    23 & 32.007 & 35.172 & 38.076 & 41.638 & 49.728 \\
+    24 & 33.196 & 36.415 & 39.364 & 42.980 & 51.179 \\
+    25 & 34.382 & 37.652 & 40.646 & 44.314 & 52.620 \\
+    26 & 35.563 & 38.885 & 41.923 & 45.642 & 54.052 \\
+    27 & 36.741 & 40.113 & 43.194 & 46.963 & 55.476 \\
+    28 & 37.916 & 41.337 & 44.461 & 48.278 & 56.892 \\
+    29 & 39.087 & 42.557 & 45.722 & 49.588 & 58.301 \\
+    30 & 40.256 & 43.773 & 46.979 & 50.892 & 59.703 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+
+\newpage
+\section{$F$分布}
+$F$ 分布临界值表给出的是：在给定分子自由度 $\mathrm{df}_1$、分母自由度 $\mathrm{df}_2$ 和显著性水平 $\alpha$ 下，满足 $P(F>F_{\alpha})=\alpha$ 的临界值。下表为 $\alpha=0.05$ 的常用临界值。
+
+\begin{table}[H]
+  \centering
+  \caption{$F$ 分布临界值表（$\alpha=0.05$）}
+  \small
+  \begin{tabular}{c|cccccccccccccc}
+    \toprule
+    $\mathrm{df}_2\backslash\mathrm{df}_1$ & 1 & 2 & 3 & 4 & 5 & 6 & 8 & 10 & 12 & 15 & 20 & 30 & 60 & $\infty$ \\
+    \midrule
+    1 & 161.45 & 199.50 & 215.71 & 224.58 & 230.16 & 233.99 & 238.88 & 241.88 & 243.91 & 245.95 & 248.01 & 250.10 & 252.20 & 254.32 \\
+    2 & 18.51 & 19.00 & 19.16 & 19.25 & 19.30 & 19.33 & 19.37 & 19.40 & 19.41 & 19.43 & 19.45 & 19.46 & 19.48 & 19.50 \\
+    3 & 10.13 & 9.55 & 9.28 & 9.12 & 9.01 & 8.94 & 8.85 & 8.79 & 8.74 & 8.70 & 8.66 & 8.62 & 8.57 & 8.53 \\
+    4 & 7.71 & 6.94 & 6.59 & 6.39 & 6.26 & 6.16 & 6.04 & 5.96 & 5.91 & 5.86 & 5.80 & 5.75 & 5.69 & 5.63 \\
+    5 & 6.61 & 5.79 & 5.41 & 5.19 & 5.05 & 4.95 & 4.82 & 4.74 & 4.68 & 4.62 & 4.56 & 4.50 & 4.43 & 4.36 \\
+    6 & 5.99 & 5.14 & 4.76 & 4.53 & 4.39 & 4.28 & 4.15 & 4.06 & 4.00 & 3.94 & 3.87 & 3.81 & 3.74 & 3.67 \\
+    7 & 5.59 & 4.74 & 4.35 & 4.12 & 3.97 & 3.87 & 3.73 & 3.64 & 3.57 & 3.51 & 3.44 & 3.38 & 3.30 & 3.23 \\
+    8 & 5.32 & 4.46 & 4.07 & 3.84 & 3.69 & 3.58 & 3.44 & 3.35 & 3.28 & 3.22 & 3.15 & 3.08 & 3.01 & 2.93 \\
+    9 & 5.12 & 4.26 & 3.86 & 3.63 & 3.48 & 3.37 & 3.23 & 3.14 & 3.07 & 3.01 & 2.94 & 2.86 & 2.79 & 2.71 \\
+    10 & 4.96 & 4.10 & 3.71 & 3.48 & 3.33 & 3.22 & 3.07 & 2.98 & 2.91 & 2.84 & 2.77 & 2.70 & 2.63 & 2.54 \\
+    12 & 4.75 & 3.89 & 3.49 & 3.26 & 3.11 & 3.00 & 2.85 & 2.75 & 2.69 & 2.62 & 2.54 & 2.47 & 2.40 & 2.30 \\
+    15 & 4.54 & 3.68 & 3.29 & 3.06 & 2.90 & 2.79 & 2.64 & 2.54 & 2.48 & 2.40 & 2.33 & 2.25 & 2.18 & 2.07 \\
+    20 & 4.35 & 3.49 & 3.10 & 2.87 & 2.71 & 2.60 & 2.45 & 2.35 & 2.28 & 2.20 & 2.12 & 2.04 & 1.95 & 1.84 \\
+    30 & 4.17 & 3.32 & 2.92 & 2.69 & 2.53 & 2.42 & 2.27 & 2.16 & 2.09 & 2.01 & 1.93 & 1.84 & 1.75 & 1.62 \\
+    60 & 4.00 & 3.15 & 2.76 & 2.53 & 2.37 & 2.25 & 2.10 & 2.00 & 1.92 & 1.84 & 1.75 & 1.65 & 1.53 & 1.39 \\
+    $\infty$ & 3.84 & 3.00 & 2.60 & 2.37 & 2.21 & 2.10 & 1.94 & 1.83 & 1.75 & 1.67 & 1.57 & 1.46 & 1.32 & 1.00 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 
 
